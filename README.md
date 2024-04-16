@@ -1,24 +1,44 @@
-# README
+# Cadê Buffet 🎉🍽️
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Motivation
 
-Things you may want to cover:
+This project is part of the training schedule at Campus Code in the TreinaDev program. Its aim is to develop skills in Ruby on Rails and create a robust project for personal portfolio. The motivation behind Where's Buffet? is to address the problem faced by individuals who need to organize parties, weddings, or corporate events but struggle to find the right catering service for their needs.
 
-* Ruby version
+***
 
-* System dependencies
+### Functionalities
 
-* Configuration
+A user can register as a client or buffet owner.
+A buffet owner can register their company by listing offered services, menus with their prices, and receive inquiries from interested individuals.
 
-* Database creation
+Functionalities in progress...
 
-* Database initialization
+***
 
-* How to run the test suite
+### How to Run the Code
 
-* Services (job queues, cache servers, search engines, etc.)
+1. Ensure you have Ruby on Rails installed on your machine. If not, you can install it by following the instructions [here](https://www.ruby-lang.org/en/documentation/installation/).
 
-* Deployment instructions
+2. Clone this repository to your local machine.
 
-* ...
+3. Navigate to the project directory in your terminal.
+
+4. Install the required dependencies by running:
+```bundle install```
+
+5. Set up the database by running:
+```rails db:create```
+```rails db:migrate```
+
+6. Start the Rails server:
+```rails server```
+or simply
+```rails s```
+
+7. Access the application in your web browser at [http://localhost:3000](http://localhost:3000).
+
+Now you're ready to explore and contribute to Cadê Buffet, and make it a standout project in your portfolio! 🚀
+
+***
+### Happy Coding
+## Vinigperuzzi 🧙‍♂️
