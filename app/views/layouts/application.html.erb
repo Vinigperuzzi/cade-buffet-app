@@ -12,7 +12,19 @@
   <body>
 
     <header>
-      
+      <nav>
+        <h1><%= link_to 'Cadê Buffet', root_path %></h1>
+        <div id="navigation-buttons">
+
+        </div>
+        <div id="login-area">
+          <% if user_signed_in? %>
+            <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to 'Entrar', new_user_session_path %>
+          <% end %>
+        </div>
+      </nav>
     </header>
 
     <main>
