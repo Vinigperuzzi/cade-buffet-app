@@ -59,3 +59,12 @@ header nav h1 {
   border-radius: 20px;
   padding: 10px;
 }
+
+#login-area{
+  font-size: medium;
+  color: var(--primary-red-dark);
+  background-color: inherit;
+  align-self: flex-end;
+  margin-left: auto;
+  margin-right: 5px;
+}
