@@ -1,37 +1,14 @@
 :root {
-  /* Cores principais */
-  --primary-orange: #FFA500;
-  --primary-orange-light: #FFD700;
-  --primary-orange-dark: #FF8C00;
-
-  --primary-yellow: #FFFF00;
-  --primary-yellow-light: #FFFFE0;
-  --primary-yellow-dark: #FFD700;
-
-  --primary-green: #32CD32;
-  --primary-green-light: #90EE90;
-  --primary-green-dark: #008000;
-
-  --primary-red: #FF0000;
-  --primary-red-light: #FF6347;
-  --primary-red-dark: #8B0000;
-
-  --primary-blue: #87CEEB;
-  --primary-blue-light: #B0E0E6;
-  --primary-blue-dark: #4682B4;
-
-  /* Cores complementares */
-  --complementary-orange: #FF4500;
-  --complementary-yellow: #FFA500;
-  --complementary-green: #228B22;
-  --complementary-red: #DC143C;
-  --complementary-blue: #4169E1;
+  --main-color: #8434a4;
+  --lighter-color: #cb9adf;
+  --darker-color: #240c34;
+  --grey-color: #7b6d82;
+  --light-color: #c0b9c5;
 }
 
 * {
   margin: 0px;
   padding: 0px;
-  background-color: var(--primary-blue-light);
 }
 
 a {
@@ -43,28 +20,133 @@ a {
 
 header nav {
   display: flex;
-  margin-top: 15px;
-  background-color: var(--primary-yellow-light);
   width: 100vw;
-  height: 10vh;
+  height: 90px;
 }
 
 header nav h1 {
-  font-family: 'Roboto', sans-serif;
-  font-size: xx-large;
-  background-color: var(--primary-yellow);
-  color: var(--primary-red-dark);
-  width: auto;
-  height: auto;
   border-radius: 20px;
-  padding: 10px;
 }
 
 #login-area{
+  display: flex;
   font-size: medium;
   color: var(--primary-red-dark);
   background-color: inherit;
   align-self: flex-end;
   margin-left: auto;
-  margin-right: 5px;
+}
+
+#login-area p{
+  margin: 0px 10px;
+  color: var(--main-color);
+  font-size: x-large;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: var(--main-color);
+  color: white;
+  font-size: medium;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--darker-color);
+}
+
+#login-button {
+  margin-left: auto;
+}
+
+#logout-button {
+  background-color: var(--lighter-color);
+}
+
+#logout-button:hover {
+  background-color: var(--grey-color);
+}
+
+.notice, .alert {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.notice {
+  background-color: var(--lighter-color);
+  color: var(--main-color);
+}
+
+.alert {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+form {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form h2 {
+  font-size: 24px;
+  color: var(--main-color);
+  margin-bottom: 20px;
+}
+
+.field {
+  margin-bottom: 15px;
+}
+
+.field label {
+  font-weight: bold;
+  color: var(--main-color);
+}
+
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+.actions input[type="submit"] {
+  background-color: var(--main-color);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.actions input[type="submit"]:hover {
+  background-color: var(--lighter-color);
+}
+
+.actions a {
+  color: var(--main-color);
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.actions a:hover {
+  color: var(--lighter-color);
 }

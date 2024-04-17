@@ -13,15 +13,23 @@
 
     <header>
       <nav>
-        <h1><%= link_to 'Cadê Buffet', root_path %></h1>
+        <h1>
+          <%= link_to root_path do %>
+            <div>
+              <% banner_description = "Logo da Cadê buffet com as letras CB estilizadas em branco sobre um fundo lilás e o nome da marca na parte de baixo com o Cadê com letras roxas e o Buffet com letras brancas." %>
+              <%= image_tag 'Full-Banner-minor.png', alt: banner_description, width: 150, height: 90 %>
+            </div>
+          <% end %>
+        </h1>
         <div id="navigation-buttons">
 
         </div>
         <div id="login-area">
           <% if user_signed_in? %>
-            <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+            <p><%= current_user.email %></p>
+            <p><%= button_to 'Sair', destroy_user_session_path, method: :delete %></p>
           <% else %>
-            <%= link_to 'Entrar', new_user_session_path %>
+            <p><%= button_to 'Entrar', new_user_session_path %></p>
           <% end %>
         </div>
       </nav>
@@ -29,8 +37,12 @@
 
     <main>
       <div>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+        <% if notice %>
+          <p class="notice"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert"><%= alert %></p>
+        <% end %>
       </div>
     <%= yield %>
     </main>
