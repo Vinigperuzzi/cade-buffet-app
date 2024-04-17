@@ -1,0 +1,76 @@
+#home-card-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: xx-large;
+  color: #8434a4;
+}
+
+.home-cards {
+  padding: 20px;
+}
+
+.home-cards h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  color: #8434a4;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 16px;
+}
+
+
+.login-choice {
+  text-align: center;
+}
+
+.login-choice h1 {
+  margin-bottom: 20px;
+  color: #8434a4;
+}
+
+.login-options {
+  display: flex;
+  justify-content: center;
+}
+
+.home-login-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #8434a4;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.home-login-button:hover {
+  background-color: #cb9adf;
+}
+
+.home-login-button.owner {
+  background-color: #240c34;
+}
+
+.home-login-button.user {
+  background-color: #240c34;;
+}

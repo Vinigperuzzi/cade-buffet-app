@@ -17,7 +17,6 @@ a {
   background-color: inherit;
 }
 
-
 header nav {
   display: flex;
   width: 100vw;
@@ -40,6 +39,7 @@ header nav h1 {
 #login-area p{
   margin: 0px 10px;
   color: var(--main-color);
+  align-self: center;
   font-size: x-large;
 }
 

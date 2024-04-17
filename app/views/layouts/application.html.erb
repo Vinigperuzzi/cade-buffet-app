@@ -29,7 +29,7 @@
             <p><%= current_user.email %></p>
             <p><%= button_to 'Sair', destroy_user_session_path, method: :delete %></p>
           <% else %>
-            <p><%= button_to 'Entrar', new_user_session_path %></p>
+            <p><%= button_to 'Entrar', signup_choice_path, method: :get %></p>
           <% end %>
         </div>
       </nav>

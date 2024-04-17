@@ -5,6 +5,7 @@ describe 'Usuário se autentica' do
     User.create!(email: 'vinicius@email.com', password: 'password')
     visit root_path
     click_on 'Entrar'
+    click_on 'Login como Dono de Buffet'
     within('main form') do
       fill_in 'E-mail', with: 'vinicius@email.com'
       fill_in 'Senha', with: 'password'

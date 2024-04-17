@@ -1,0 +1,12 @@
+<div class="login-choice">
+    <h1>Escolha o tipo de Login</h1>
+    <div class="login-options">
+      <%= link_to new_user_session_path do %>
+        <div class="home-login-button owner">Login como Dono de Buffet</div>
+      <% end %>
+      <%= link_to new_user_session_path do %>
+        <div class="home-login-button user">Login como Cliente</div>
+      <% end %>
+    </div>
+</div>
+

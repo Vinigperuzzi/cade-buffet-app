@@ -4,6 +4,7 @@ describe 'Usuário se autentica' do
   it 'com sucesso' do
     visit root_path
     click_on 'Entrar'
+    click_on 'Login como Dono de Buffet'
     click_on 'Criar uma conta'
     fill_in 'E-mail', with: 'vini@email.com'
     fill_in 'Senha', with: 'password'
