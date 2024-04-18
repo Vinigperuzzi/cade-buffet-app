@@ -42,6 +42,9 @@ class BuffetsController < ApplicationController
   end
 
   def set_buffet_for_current_user
+    if current_user.buffet_id == nil
+      return redirect_to new_buffet_path, alert: 'Você precisa criar um Buffet para começar a utilizar a plataforma.'
+    end
     @buffet = Buffet.find(current_user.buffet_id)
   end
 end

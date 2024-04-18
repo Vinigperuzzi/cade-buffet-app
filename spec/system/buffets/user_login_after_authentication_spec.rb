@@ -11,6 +11,17 @@ describe 'User connect to aplication after authenticate itself' do
     expect(page).to have_content 'Você precisa criar um Buffet para começar a utilizar a plataforma.'
   end
 
+  it 'cannot see own buffet page (or any other) with no buffet registered yet' do
+    user = User.create!(email: 'vinicius@email.com', password: 'password')
+    
+    login_as(user)
+    visit root_path
+    click_on 'Meu Buffet'
+    
+    expect(current_path).to eq new_buffet_path
+    expect(page).to have_content 'Você precisa criar um Buffet para começar a utilizar a plataforma.'
+  end
+
   it 'already registered a buffet' do
     user = User.create!(email: 'vinicius@email.com', password: 'password')
     buffet = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
