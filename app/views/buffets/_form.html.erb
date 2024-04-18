@@ -1,0 +1,115 @@
+<%= form_with(model: @buffet) do |f| %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <% if @buffet.errors[:name].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:name) %> <%= @buffet.errors[:name].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :corporate_name %>
+    <%= f.text_field :corporate_name %>
+    <% if @buffet.errors[:corporate_name].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:corporate_name) %> <%= @buffet.errors[:corporate_name].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :register_number %>
+    <%= f.text_field :register_number %>
+    <% if @buffet.errors[:register_number].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:register_number) %> <%= @buffet.errors[:register_number].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone %>
+    <%= f.text_field :phone %>
+    <% if @buffet.errors[:phone].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:phone) %> <%= @buffet.errors[:phone].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+    <% if @buffet.errors[:email].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:email) %> <%= @buffet.errors[:email].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+    <% if @buffet.errors[:address].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:address) %> <%= @buffet.errors[:address].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :district %>
+    <%= f.text_field :district %>
+    <% if @buffet.errors[:district].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:district) %> <%= @buffet.errors[:district].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :state %>
+    <%= f.text_field :state %>
+    <% if @buffet.errors[:state].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:state) %> <%= @buffet.errors[:state].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+    <% if @buffet.errors[:city].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:city) %> <%= @buffet.errors[:city].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :payment_method %>
+    <%= f.text_field :payment_method %>
+    <% if @buffet.errors[:payment_method].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:payment_method) %> <%= @buffet.errors[:payment_method].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+    <% if @buffet.errors[:description].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:description) %> <%= @buffet.errors[:description].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Salvar Buffet' %>
+  </div>
+<% end %>

@@ -1,0 +1,30 @@
+pt-BR:
+  name: 'Nome'
+  corporate_name: 'Razão Social'
+  register_number: 'CNPJ'
+  phone: 'Telefone'
+  email: 'E-mail'
+  address: 'Endereço'
+  district: 'Bairro'
+  state: 'Estado'
+  city: 'Cidade'
+  description: 'Descrição'
+  payment_method: 'Formas de Pagamento'
+  activerecord:
+    models:
+      buffet:
+      one: 'Buffet'
+      other: 'Buffets'
+    attributes:
+      buffet:
+        name: 'Nome'
+        corporate_name: 'Razão Social'
+        register_number: 'CNPJ'
+        phone: 'Telefone'
+        email: 'E-mail'
+        address: 'Endereço'
+        district: 'Bairro'
+        state: 'Estado'
+        city: 'Cidade'
+        description: 'Descrição'
+        payment_method: 'Formas de Pagamento'

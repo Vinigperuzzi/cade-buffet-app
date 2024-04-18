@@ -21,12 +21,14 @@
             </div>
           <% end %>
         </h1>
-        <div id="navigation-buttons">
-
+        <div id="navigation-buttons" class="flex-container">
+          <% if user_signed_in? %>
+            <p><%= link_to 'Meu Buffet', my_buffet_buffets_path %></p>
+          <% end %>
         </div>
         <div id="login-area">
           <% if user_signed_in? %>
-            <p><%= current_user.email %></p>
+            <p>Conta: <%= current_user.email %></p>
             <p><%= button_to 'Sair', destroy_user_session_path, method: :delete %></p>
           <% else %>
             <p><%= button_to 'Entrar', signup_choice_path, method: :get %></p>

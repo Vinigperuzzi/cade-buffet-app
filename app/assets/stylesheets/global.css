@@ -19,8 +19,44 @@ a {
 
 header nav {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100vw;
   height: 90px;
+}
+
+header nav form {
+  background-color: inherit;
+  box-shadow: none;
+}
+
+#navigation-buttons {
+  display: flex;
+  align-items:  center;
+}
+
+#navigation-buttons p {
+  margin: 0 10px;
+}
+
+#navigation-buttons a {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 20px;
+  background-color: var(--light-color);
+  color: var(--darker-color);
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#navigation-buttons a:hover {
+  background-color: var(--main-color);
+  color: white;
+}
+
+#navigation-buttons a:active {
+  transform: translateY(2px);
 }
 
 header nav h1 {
@@ -29,7 +65,7 @@ header nav h1 {
 
 #login-area{
   display: flex;
-  font-size: medium;
+  font-size: large;
   color: var(--primary-red-dark);
   background-color: inherit;
   align-self: flex-end;
@@ -38,9 +74,11 @@ header nav h1 {
 
 #login-area p{
   margin: 0px 10px;
-  color: var(--main-color);
-  align-self: center;
-  font-size: x-large;
+}
+
+.flex-container {
+  flex: 1;
+  justify-content: center;
 }
 
 .button {
@@ -149,4 +187,44 @@ form h2 {
 
 .actions a:hover {
   color: var(--lighter-color);
+}
+
+.buffet-advise {
+  margin-top: 10px;
+  color: #ff0000;
+  font-size: 14px;
+}
+
+.buffet-card {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f9f9f9; /* Cor de fundo contrastante */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.h1-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.info-list {
+  width: 100%;
+}
+
+.info-list dt {
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: medium;
+}
+
+.info-list dd {
+  margin-left: 0;
+  margin-bottom: 10px;
+  font-size: x-large;
+}
+
+#bottom-button {
+  margin-top: 25px;
 }
