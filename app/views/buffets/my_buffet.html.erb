@@ -1,43 +1,4 @@
-<div class="buffet-card">
-  <div class="h1-info">
-    <h1>Exibindo o Buffet <%= @buffet.name %></h1>
-  </div>
-
-  <dl class="info-list">
-    <dt>Nome:</dt>
-    <dd><%= @buffet.name %></dd>
-
-    <dt>Descrição:</dt>
-    <dd><%= @buffet.description %></dd>
-
-    <dt>Razão Social:</dt>
-    <dd><%= @buffet.corporate_name %></dd>
-
-    <dt>CNPJ:</dt>
-    <dd><%= @buffet.register_number %></dd>
-    
-    <dt>Telefone:</dt>
-    <dd><%= @buffet.phone %></dd>
-
-    <dt>E-mail:</dt>
-    <dd><%= @buffet.email %></dd>
-
-    <dt>Endereço:</dt>
-    <dd><%= @buffet.address %></dd>
-
-    <dt>Bairro:</dt>
-    <dd><%= @buffet.district %></dd>
-
-    <dt>Estado:</dt>
-    <dd><%= @buffet.state %></dd>
-    
-    <dt>Cidade:</dt>
-    <dd><%= @buffet.city %></dd>
-
-    <dt>Métodos de Pagamento:</dt>
-    <dd><%= @buffet.payment_method %></dd>
-  </dl>
-</div>
+<%= render 'buffet_info' %>
 
 <div class="login-options" id="bottom-button">
   <%= link_to 'Editar Buffet', edit_buffet_path(current_user.buffet_id), class: "home-login-button owner" %>

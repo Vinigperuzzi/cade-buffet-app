@@ -5,6 +5,10 @@ class BuffetsController < ApplicationController
   def my_buffet
   end
 
+  def show
+    @buffet = Buffet.find(params[:id])
+  end
+
   def new
     unless current_user.buffet_id == nil
       redirect_to root_path, alert: 'Já existe um Buffet cadastrado para esse usuário.'
