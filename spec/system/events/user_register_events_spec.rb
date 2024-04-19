@@ -144,6 +144,7 @@ describe 'User access his own buffet page to create a event' do
     expect(page).to have_content 'Casamento'
     expect(page).to have_content 'Serviço de mesa completo para casamentos'
     expect(page).to have_content '40'
+    expect(page).to have_content 'Valor ainda não informado'
     expect(page).to have_content 'Mostrar Detalhes'
     expect(page).not_to have_content 'Evento Corporativo'
     expect(page).not_to have_content 'Buffet com estilo mais profissional para eventos de empresa'

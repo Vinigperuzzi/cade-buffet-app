@@ -7,6 +7,12 @@
         <h2 class="event-card-title"><%= event.name %></h2>
         <div class="event-card-description"><%= event.description %></div>
         <div class="event-card-item">Capacidade Máxima: <%= event.max_qtd %></div>
+        <% price = Price.find_by(event_id: event.id) %>
+        <% if price %>
+          <div class="event-card-item">A partir de: <%= price.base_price %></div>
+        <% else %>
+          <div class="event-card-item">Valor ainda não informado</div>
+        <% end %>
         <%= link_to 'Mostrar Detalhes', event_path(event.id), class: 'show-details-button' %>
       </div>
     </div>

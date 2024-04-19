@@ -1,0 +1,67 @@
+<%= form_with(model: [@event, @price]) do |f| %>
+  <div class="field">
+    <%= f.label :base_price %>
+    <%= f.number_field :base_price %>
+    <% if @price.errors[:base_price].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:base_price) %> <%= @price.errors[:base_price].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :additional_person %>
+    <%= f.number_field :additional_person %>
+    <% if @price.errors[:additional_person].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:additional_person) %> <%= @price.errors[:additional_person].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+ <div class="field">
+    <%= f.label :extra_hour %>
+    <%= f.number_field :extra_hour %>
+    <% if @price.errors[:extra_hour].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:extra_hour) %> <%= @price.errors[:extra_hour].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sp_base_price %>
+    <%= f.number_field :sp_base_price %>
+    <% if @price.errors[:sp_base_price].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:sp_base_price) %> <%= @price.errors[:sp_base_price].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :sp_additional_person %>
+    <%= f.number_field :sp_additional_person %>
+    <% if @price.errors[:sp_additional_person].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:sp_additional_person) %> <%= @price.errors[:sp_additional_person].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+   <div class="field">
+    <%= f.label :sp_extra_hour %>
+    <%= f.number_field :sp_extra_hour %>
+    <% if @price.errors[:sp_extra_hour].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:sp_extra_hour) %> <%= @price.errors[:sp_extra_hour].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <p class="form-info">campos especiais referem-se aos finais de semanas e feriado.</p>
+
+  <div class="actions">
+    <%= f.submit 'Salvar Preço' %>
+  </div>
+<% end %>

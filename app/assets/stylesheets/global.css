@@ -142,6 +142,12 @@ form h2 {
   margin-bottom: 20px;
 }
 
+.form-info {
+  font-size: 14px;
+  color: #777;
+  margin-top: 10px;
+}
+
 .field {
   margin-bottom: 15px;
 }

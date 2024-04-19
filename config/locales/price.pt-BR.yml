@@ -1,0 +1,20 @@
+pt-BR:
+  base_price: 'Preço Base'
+  additional_person: 'Adicional por Pessoa'
+  extra_hour: 'Adicional por Hora Extra'
+  sp_base_price: 'Preço Base Especial'
+  sp_additional_person: 'Adicional por Pessoa Especial'
+  sp_extra_hour: 'Adicional por Hora Extra Especial'
+  activerecord:
+    models:
+      price:
+      one: 'Preço'
+      other: 'Preços'
+    attributes:
+      price:
+        base_price: 'Preço Base'
+        additional_person: 'Adicional por Pessoa'
+        extra_hour: 'Adicional por Hora Extra'
+        sp_base_price: 'Preço Base Especial'
+        sp_additional_person: 'Adicional por Pessoa Especial'
+        sp_extra_hour: 'Adicional por Hora Extra Especial'
