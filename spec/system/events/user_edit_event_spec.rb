@@ -1,26 +1,27 @@
-require 'rails_helper'
+require "rails_helper"
 
-describe 'User edit its own buffet' do
+describe 'User edit an event' do
   it 'and are not authenticated' do
-    user = User.create!(email: 'vinicius@email.com', password: 'password')
     buffet = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
                           register_number: '12456456000145', phone: '53 991814646', email: 'vinigperuzzi@gourmet.com',
                           address: 'Estrada do Laranjal, 695', district: 'Laranjal', state: 'RS', city: 'Pelotas',
                           payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
-    user.update!(buffet_id: buffet.id)
+    event = Event.create!(name: 'Casamento', description: 'Serviço de mesa completo para casamentos', min_qtd: 20, max_qtd: 40,
+                            duration: 250, menu: 'Frutos do Mar', buffet_id: buffet.id)
+    visit edit_event_path(event.id)
 
-    visit edit_buffet_path(buffet.id)
-    
     expect(current_path).to eq new_user_session_path
   end
 
-  it "and cannot edit other's buffet" do
+  it "and cannot edit other's buffet's events" do
     user1 = User.create!(email: 'vinicius@email.com', password: 'password')
     buffet1 = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
                           register_number: '12456456000145', phone: '53 991814646', email: 'vinigperuzzi@gourmet.com',
                           address: 'Estrada do Laranjal, 695', district: 'Laranjal', state: 'RS', city: 'Pelotas',
                           payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
     user1.update!(buffet_id: buffet1.id)
+    event = Event.create!(name: 'Casamento', description: 'Serviço de mesa completo para casamentos', min_qtd: 20, max_qtd: 40,
+                            duration: 250, menu: 'Frutos do Mar', buffet_id: buffet1.id)
 
     user2 = User.create!(email: 'debora@email.com', password: 'password2')
     buffet2 = Buffet.create!(name: 'Dé Licias', corporate_name: 'Débora Doces e tortas', 
@@ -29,11 +30,11 @@ describe 'User edit its own buffet' do
                           payment_method: 'Dinheiro', description: 'Doces e tortas para alegrara sua vida')
     user2.update!(buffet_id: buffet2.id)
 
-    login_as(user1)
-    visit edit_buffet_path(buffet2.id)
+    login_as(user2)
+    visit edit_event_path(event.id)
 
-    expect(page).to have_content 'Editar o Buffet Vini'
-    expect(page).not_to have_content 'Editar o Buffet Dé Licias'
+    expect(current_path).to eq my_buffet_buffets_path
+    expect(page).to have_content 'Você não tem permissão para editar esse evento.'
   end
 
   it 'and fails' do
@@ -43,16 +44,19 @@ describe 'User edit its own buffet' do
                           address: 'Estrada do Laranjal, 695', district: 'Laranjal', state: 'RS', city: 'Pelotas',
                           payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
     user.update!(buffet_id: buffet.id)
+    event = Event.create!(name: 'Casamento', description: 'Serviço de mesa completo para casamentos', min_qtd: 20, max_qtd: 40,
+                            duration: 250, menu: 'Frutos do Mar', buffet_id: buffet.id)
 
     login_as(user)
     visit root_path
     click_on 'Meu Buffet'
-    click_on 'Editar Buffet'
-    fill_in 'Nome', with: ''
-    click_on 'Salvar Buffet'
+    click_on 'Mostrar Detalhes'
+    click_on 'Editar Evento'
+    fill_in 'Cardápio', with: ''
+    click_on 'Salvar Evento'
 
-    expect(page).to have_content 'Não foi possível atualizar o Buffet.'
-    expect(page).to have_content 'Nome não pode ficar em branco'
+    expect(page).to have_content 'Não foi possível atualizar o Evento.'
+    expect(page).to have_content 'Cardápio não pode ficar em branco'
   end
 
   it 'succesfully, from home page' do
@@ -62,27 +66,19 @@ describe 'User edit its own buffet' do
                           address: 'Estrada do Laranjal, 695', district: 'Laranjal', state: 'RS', city: 'Pelotas',
                           payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
     user.update!(buffet_id: buffet.id)
+    event = Event.create!(name: 'Casamento', description: 'Serviço de mesa completo para casamentos', min_qtd: 20, max_qtd: 40,
+                            duration: 250, menu: 'Frutos do Mar', buffet_id: buffet.id)
 
     login_as(user)
     visit root_path
     click_on 'Meu Buffet'
-    click_on 'Editar Buffet'
-    fill_in 'E-mail', with: 'vinigperuzzi@email.com'
-    click_on 'Salvar Buffet'
+    click_on 'Mostrar Detalhes'
+    click_on 'Editar Evento'
+    fill_in 'Cardápio', with: 'Carnes Nobres'
+    click_on 'Salvar Evento'
+    click_on 'Mostrar Detalhes'
 
-    expect(current_path).to eq my_buffet_buffets_path
-    expect(page).to have_content 'Buffet atualizado com sucesso.'
-    expect(page).to have_content 'Exibindo o Buffet Vini'
-    expect(page).to have_content 'Nome: Vini'
-    expect(page).to have_content 'Descrição: O melhor serviço de buffet do centro de Pelotas'
-    expect(page).to have_content 'Razão Social: Vinícius Gourmet alimentos'
-    expect(page).to have_content 'CNPJ: 12456456000145'
-    expect(page).to have_content 'Telefone: 53 991814646'
-    expect(page).to have_content 'E-mail: vinigperuzzi@email.com'
-    expect(page).to have_content 'Endereço: Estrada do Laranjal, 695'
-    expect(page).to have_content 'Bairro: Laranjal'
-    expect(page).to have_content 'Estado: RS'
-    expect(page).to have_content 'Cidade: Pelotas'
-    expect(page).to have_content 'Métodos de Pagamento: Pix, Débito, Crédito, Dinheiro'
+    expect(page).to have_content 'Cardápio: Carnes Nobres'
+    expect(page).not_to have_content 'Cardápio: Frutos do mar'
   end
 end

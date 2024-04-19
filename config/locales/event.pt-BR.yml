@@ -1,0 +1,29 @@
+pt-BR:
+  name: 'Nome'
+  description: 'Descrição'
+  min_qtd: 'Quantidade mínima'
+  max_qtd: 'Quantidade máxima'
+  duration: 'Duração'
+  menu: 'Cardápio'
+  drinks: 'Bebidas'
+  decoration: 'Decoração'
+  valet: 'Serviço de Estacionamento'
+  only_local: 'Exclusivo no Local'
+  activerecord:
+    models:
+      event:
+      one: 'Evento'
+      others: 'Eventos'
+    attributes:
+      event:
+        name: 'Nome'
+        description: 'Descrição'
+        min_qtd: 'Quantidade mínima'
+        max_qtd: 'Quantidade máxima'
+        duration: 'Duração'
+        menu: 'Cardápio'
+        drinks: 'Bebidas Alcoólicas'
+        decoration: 'Decoração'
+        valet: 'Serviço de Estacionamento'
+        only_local: 'Exclusivo no Local'
+        

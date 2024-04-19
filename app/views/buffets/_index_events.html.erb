@@ -1,0 +1,14 @@
+<h1>Eventos Disponíveis</h1>
+
+<div class="event-card-container">
+  <% @events.each do |event| %>
+    <div class="event-card">
+      <div>
+        <h2 class="event-card-title"><%= event.name %></h2>
+        <div class="event-card-description"><%= event.description %></div>
+        <div class="event-card-item">Capacidade Máxima: <%= event.max_qtd %></div>
+        <%= link_to 'Mostrar Detalhes', event_path(event.id), class: 'show-details-button' %>
+      </div>
+    </div>
+  <% end %>
+</div>

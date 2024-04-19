@@ -40,5 +40,12 @@ or simply
 Now you're ready to explore and contribute to Cadê Buffet, and make it a standout project in your portfolio! 🚀
 
 ***
+
+### Running tests
+
+You can simply run ```rspec```, so all tests may be running. But, sometimes, in some architectures may occur some errors while trying to run this command, something about pending migrations, if it is the case, you can run the command ```rake db:migrate RAILS_ENV=test ```, and the migrations may take effects in the dev environment as well.
+
+***
+
 ### Happy Coding
 ## Vinigperuzzi 🧙‍♂️

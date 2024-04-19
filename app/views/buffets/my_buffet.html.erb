@@ -2,4 +2,7 @@
 
 <div class="login-options" id="bottom-button">
   <%= link_to 'Editar Buffet', edit_buffet_path(current_user.buffet_id), class: "home-login-button owner" %>
+  <%= link_to 'Adicionar Evento', new_event_path, class: "home-login-button owner" %>
 </div>
+
+<%= render 'index_events' %>

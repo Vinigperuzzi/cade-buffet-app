@@ -1,0 +1,60 @@
+<div class="buffet-card">
+  <div class="h1-info">
+    <h1>Exibindo o Evento <%= @event.name %> do Buffet <%= @buffet.name%> </h1>
+  </div>
+
+  <dl class="info-list">
+    <dt>Nome:</dt>
+    <dd><%= @event.name %></dd>
+
+    <dt>Descrição:</dt>
+    <dd><%= @event.description %></dd>
+
+    <dt>Quantidade mínima de pessoas:</dt>
+    <dd><%= @event.min_qtd %></dd>
+
+    <dt>Quantidade máxima de pessoas:</dt>
+    <dd><%= @event.max_qtd %></dd>
+    
+    <dt>Duração:</dt>
+    <dd><%= @event.duration %></dd>
+
+    <dt>Cardápio:</dt>
+    <dd><%= @event.menu %></dd>
+
+    <dt>Bebidas Alcoólicas:</dt>
+    <% if @event.drinks %>
+      <dd>Disponíveis</dd>
+    <% else %>
+      <dd>Não disponíveis</dd>
+    <% end %>
+
+    <dt>Decoração:</dt>
+    <% if @event.decoration %>
+      <dd>Disponível</dd>
+    <% else %>
+      <dd>Não disponível</dd>
+    <% end %>
+
+    <dt>Serviço de Estacionamento:</dt>
+    <% if @event.valet %>
+      <dd>Disponível</dd>
+    <% else %>
+      <dd>Não disponível</dd>
+    <% end %>
+
+    <dt>Exclusivo no local:</dt>
+    <% if @event.only_local %>
+      <dd>Evento somente disponível no local do buffet</dd>
+    <% else %>
+      <dd>Evento pode ser feito em qualquer outro local adequado</dd>
+    <% end %>
+  </dl>
+</div>
+
+<div class="login-options" id="bottom-button">
+  <% if @event.buffet_id == current_user.buffet_id %>
+    <%= button_to 'Editar Evento', edit_event_path(@event.id), method: :get, class: 'home-login-button owner' %>
+    <%= button_to 'Excluir Evento', event_path(@event.id), method: :delete, class: 'home-login-button owner' %>
+  <% end %>
+</div>

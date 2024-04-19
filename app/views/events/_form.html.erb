@@ -1,0 +1,105 @@
+<%= form_with(model: @event) do |f| %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <% if @event.errors[:name].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:name) %> <%= @event.errors[:name].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+    <% if @event.errors[:description].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:description) %> <%= @event.errors[:description].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :min_qtd %>
+    <%= f.number_field :min_qtd %>
+    <% if @event.errors[:min_qtd].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:min_qtd) %> <%= @event.errors[:min_qtd].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :max_qtd %>
+    <%= f.number_field :max_qtd %>
+    <% if @event.errors[:max_qtd].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:max_qtd) %> <%= @event.errors[:max_qtd].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :duration %>
+    <%= f.number_field :duration %>
+    <% if @event.errors[:duration].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:duration) %> <%= @event.errors[:duration].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :menu %>
+    <%= f.text_field :menu %>
+    <% if @event.errors[:menu].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:menu) %> <%= @event.errors[:menu].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :drinks %>
+    <%= f.check_box :drinks %>
+    <% if @event.errors[:drinks].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:drinks) %> <%= @event.errors[:drinks].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :decoration %>
+    <%= f.check_box :decoration %>
+    <% if @event.errors[:decoration].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:decoration) %> <%= @event.errors[:decoration].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :valet %>
+    <%= f.check_box :valet %>
+    <% if @event.errors[:valet].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:valet) %> <%= @event.errors[:valet].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :only_local %>
+    <%= f.check_box :only_local %>
+    <% if @event.errors[:only_local].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:only_local) %> <%= @event.errors[:only_local].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Salvar Evento' %>
+  </div>
+<% end %>

@@ -14,6 +14,12 @@ describe "User see your own buffet" do
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
   end
 
+  it "and can't see 'Meu buffet' button while not authenticated" do
+    visit root_path
+
+    expect(page).not_to have_button 'Meu Buffet'
+  end
+
   it 'succesfully, from home' do
     user = User.create!(email: 'vinicius@email.com', password: 'password')
     buffet = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 

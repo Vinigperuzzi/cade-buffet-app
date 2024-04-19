@@ -7,4 +7,5 @@ Rails.application.routes.draw do
       get 'my_buffet'
     end
   end
+  resources :events, only: [:new, :create, :show, :edit, :update, :destroy]
 end

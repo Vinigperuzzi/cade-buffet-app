@@ -3,10 +3,14 @@ class BuffetsController < ApplicationController
   before_action :set_buffet_for_current_user, only: [:my_buffet, :edit, :update]
 
   def my_buffet
+    @events = Event.where(buffet_id: current_user.buffet_id)
   end
 
   def show
     @buffet = Buffet.find(params[:id])
+    if @buffet.id == current_user.buffet_id
+      return redirect_to my_buffet_buffets_path
+    end
   end
 
   def new
@@ -35,8 +39,12 @@ class BuffetsController < ApplicationController
   end
 
   def update
-    @buffet.update(get_params)
-    redirect_to my_buffet_buffets_path, notice: 'Buffet atualizado com sucesso.'
+    if @buffet.update(get_params)
+      redirect_to my_buffet_buffets_path, notice: 'Buffet atualizado com sucesso.'
+    else
+      flash.now[:alert] = 'Não foi possível atualizar o Buffet.'
+      render 'new'
+    end
   end
 
   private
