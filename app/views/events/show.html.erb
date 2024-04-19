@@ -58,7 +58,7 @@
     <% if @price == nil %>
       <%= button_to 'Adicionar Preço', new_event_price_path(event_id: @event.id), method: :get, class: 'home-login-button owner' %>
     <% else %>
-      <%= button_to 'Editar Preço', edit_event_price_path(@price.id), method: :get, class: 'home-login-button owner' %>
+      <%= button_to 'Editar Preço', edit_event_price_path(event_id: @event.id, id: @price.id), method: :get, class: 'home-login-button owner' %>
     <% end %>
     <%= button_to 'Excluir Evento', event_path(@event.id), method: :delete, class: 'home-login-button owner' %>
   <% end %>
