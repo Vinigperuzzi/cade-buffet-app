@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :buffets, only: [:new, :create, :edit, :update, :show, :index] do
     collection do
       get 'my_buffet'
+      get 'search'
     end
   end
   resources :events, only: [:new, :create, :show, :edit, :update, :destroy] do

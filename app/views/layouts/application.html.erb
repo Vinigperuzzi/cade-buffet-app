@@ -26,6 +26,13 @@
             <p><%= link_to 'Meu Buffet', my_buffet_buffets_path %></p>
           <% else %>
             <p><%= link_to 'Lista de Buffets', buffets_path %></p>
+            <p class="search-form">
+              <%= form_with(url: search_buffets_path, method: :get, class: "search-form") do |f| %>
+                <%= f.label :query, 'Buscar Buffet', class: "search-label" %>
+                <%= f.text_field :query, class: "search-input" %>
+                <%= f.submit 'Buscar', class: "search-button" %>
+              <% end %>
+            </p>
           <% end %>
         </div>
         <div id="login-area">

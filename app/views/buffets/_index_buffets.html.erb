@@ -1,0 +1,8 @@
+<div class="event-card-container">
+  <% @buffets.each do |buffet| %>
+    <div class="event-card">
+      <h2><%= link_to "#{buffet.name}", buffet_path(buffet), class: 'show-details-button' %></h2>
+      <p class="event-card-item"><%= buffet.city %> - <%= buffet.state %></p>
+    </div>
+  <% end %>
+</div>

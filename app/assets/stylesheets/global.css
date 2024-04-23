@@ -59,6 +59,38 @@ header nav form {
   transform: translateY(2px);
 }
 
+.search-form {
+  margin-bottom: 20px;
+}
+
+.search-label {
+  font-size: 16px;
+  color: #333;
+  margin-right: 10px;
+}
+
+.search-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: var(--main-color);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-button:hover {
+  background-color: var(--darker-color);
+}
+
 header nav h1 {
   border-radius: 20px;
 }

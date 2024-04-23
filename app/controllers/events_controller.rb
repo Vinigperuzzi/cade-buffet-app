@@ -43,7 +43,10 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     return unless @event.buffet_id == current_user.buffet_id
-    @event.destroy
+    ActiveRecord::Base.transaction do
+      @event.prices.destroy_all
+      @event.destroy
+    end
     redirect_to my_buffet_buffets_path
   end
 

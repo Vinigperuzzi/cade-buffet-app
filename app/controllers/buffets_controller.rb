@@ -1,5 +1,5 @@
 class BuffetsController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :index]
+  before_action :authenticate_user!, except: [:show, :index, :search]
   before_action :set_buffet_for_current_user, only: [:my_buffet, :edit, :update]
 
   def my_buffet
@@ -49,6 +49,15 @@ class BuffetsController < ApplicationController
       flash.now[:alert] = 'Não foi possível atualizar o Buffet.'
       render 'new'
     end
+  end
+
+  def search
+    @term = params[:query]
+    buffets_by_name_or_city = Buffet.where("name LIKE :term OR city LIKE :term", term: "%#{@term}%").order(:name)
+    events_by_name = Event.where("events.name LIKE ?", "%#{@term}%")
+    buffets_by_event_name = Buffet.joins(:events).where(events: { name: events_by_name.pluck(:name) }).order(:name).distinct.order(:name)
+    @buffets = (buffets_by_event_name | buffets_by_name_or_city)
+    @buffets = (@buffets.sort_by { |buffet| buffet.name.downcase })
   end
 
   private

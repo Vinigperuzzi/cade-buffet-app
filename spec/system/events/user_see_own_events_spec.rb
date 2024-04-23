@@ -58,7 +58,7 @@ describe 'User sees details of an event' do
     expect(page).to have_content 'Editar Evento'
   end
 
-  it 'and id do not own the event' do
+  it 'and it do not own the event' do
     user = User.create!(email: 'vinicius@email.com', password: 'password')
     buffet = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
                           register_number: '12456456000145', phone: '53 991814646', email: 'vinigperuzzi@gourmet.com',
