@@ -10,8 +10,10 @@
     <dt>Descrição:</dt>
     <dd><%= @buffet.description %></dd>
 
-    <dt>Razão Social:</dt>
-    <dd><%= @buffet.corporate_name %></dd>
+    <% if user_signed_in? %>
+      <dt>Razão Social:</dt>
+      <dd><%= @buffet.corporate_name %></dd>
+    <% end %>
 
     <dt>CNPJ:</dt>
     <dd><%= @buffet.register_number %></dd>

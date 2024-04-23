@@ -1,5 +1,5 @@
 class BuffetsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :set_buffet_for_current_user, only: [:my_buffet, :edit, :update]
 
   def my_buffet
@@ -8,9 +8,13 @@ class BuffetsController < ApplicationController
 
   def show
     @buffet = Buffet.find(params[:id])
-    if @buffet.id == current_user.buffet_id
+    if current_user != nil and @buffet.id == current_user.buffet_id
       return redirect_to my_buffet_buffets_path
     end
+  end
+
+  def index
+    @buffets = Buffet.all
   end
 
   def new
