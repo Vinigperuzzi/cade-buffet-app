@@ -68,7 +68,7 @@
 </div>
 
 <div class="login-options" id="bottom-button">
-  <% if @event.buffet_id == current_user.buffet_id %>
+  <% if current_user != nil and @event.buffet_id == current_user.buffet_id %>
     <%= button_to 'Editar Evento', edit_event_path(@event.id), method: :get, class: 'home-login-button owner' %>
     <%= button_to 'Excluir Evento', event_path(@event.id), method: :delete, class: 'home-login-button owner' %>
     <% if @price == nil %>

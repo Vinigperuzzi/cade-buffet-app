@@ -3,7 +3,11 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @buffet = Buffet.find(current_user.buffet_id)
+    unless current_user.nil?
+      @buffet = Buffet.find(current_user.buffet_id)
+    else
+      @buffet = Buffet.find(params[:id])
+    end
     @price = Price.where(event_id: @event.id).first
   end
 

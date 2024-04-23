@@ -11,6 +11,7 @@ class BuffetsController < ApplicationController
     if current_user != nil and @buffet.id == current_user.buffet_id
       return redirect_to my_buffet_buffets_path
     end
+    @events = Event.where(buffet_id: params[:id])
   end
 
   def index
