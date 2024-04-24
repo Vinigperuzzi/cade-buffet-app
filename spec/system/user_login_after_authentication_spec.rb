@@ -4,7 +4,7 @@ describe 'User connect to aplication after authenticate itself' do
   it 'and has not registered a buffet yet' do
     user = User.create!(email: 'vinicius@email.com', password: 'password')
     
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     
     expect(current_path).to eq new_buffet_path
@@ -14,7 +14,7 @@ describe 'User connect to aplication after authenticate itself' do
   it 'cannot see own buffet page (or any other) with no buffet registered yet' do
     user = User.create!(email: 'vinicius@email.com', password: 'password')
     
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     click_on 'Meu Buffet'
     

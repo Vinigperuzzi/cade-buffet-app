@@ -10,7 +10,7 @@ describe "User register a buffet for it's own account" do
   it 'and do not see any advise messages for inputs at first' do
     user = User.create!(email: 'vinicius@email.com', password: 'password')
 
-    login_as(user)
+    login_as user, scope: :user
     visit new_buffet_path
 
     expect(page).not_to have_content 'Não foi possível registrar o Buffet.'
@@ -30,7 +30,7 @@ describe "User register a buffet for it's own account" do
   it 'with obrigatory fields empty' do
     user = User.create!(email: 'vinicius@email.com', password: 'password')
 
-    login_as(user)
+    login_as user, scope: :user
     visit new_buffet_path
     fill_in 'Nome', with: ''
     fill_in 'Razão Social', with: ''
@@ -56,7 +56,7 @@ describe "User register a buffet for it's own account" do
   it 'and the advise message disapear for a filled input' do
     user = User.create!(email: 'vinicius@email.com', password: 'password')
 
-    login_as(user)
+    login_as user, scope: :user
     visit new_buffet_path
     fill_in 'Nome', with: 'Vinícius Gourmet'
     fill_in 'Razão Social', with: ''
@@ -78,7 +78,7 @@ describe "User register a buffet for it's own account" do
   it 'succesfully, directly redirect after login' do
     user = User.create!(email: 'vinicius@email.com', password: 'password')
 
-    login_as(user)
+    login_as user, scope: :user
     visit new_buffet_path
     fill_in 'Nome', with: 'Vinícius Gourmet'
     fill_in 'Razão Social', with: 'Vinícius Gourmet alimentos'
@@ -105,7 +105,7 @@ describe "User register a buffet for it's own account" do
                           payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
     user.update!(buffet_id: buffet.id)
 
-    login_as(user)
+    login_as user, scope: :user
     visit new_buffet_path
 
     expect(current_path).to eq root_path

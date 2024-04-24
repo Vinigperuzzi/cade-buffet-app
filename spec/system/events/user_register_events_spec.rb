@@ -33,7 +33,7 @@ describe 'User access his own buffet page to create a event' do
                           payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
     user.update!(buffet_id: buffet.id)
 
-    login_as(user)
+    login_as user, scope: :user
     visit new_event_path
     fill_in 'Nome', with: ''
     fill_in 'Descrição', with: ''
@@ -55,7 +55,7 @@ describe 'User access his own buffet page to create a event' do
                           payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
     user.update!(buffet_id: buffet.id)
 
-    login_as(user)
+    login_as user, scope: :user
     visit new_event_path
     fill_in 'Nome', with: 'Casamento'
     fill_in 'Descrição', with: ''
@@ -77,7 +77,7 @@ describe 'User access his own buffet page to create a event' do
                           payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
     user.update!(buffet_id: buffet.id)
 
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     click_on 'Meu Buffet'
     click_on 'Adicionar Evento'
@@ -108,7 +108,7 @@ describe 'User access his own buffet page to create a event' do
     event2 = Event.create!(name: 'Evento Corporativo', description: 'Buffet com estilo mais profissional para eventos de empresa', min_qtd: 40, max_qtd: 100,
                           duration: 360, menu: 'Canapés', buffet_id: buffet.id)
     
-    login_as(user)
+    login_as user, scope: :user
     visit my_buffet_buffets_path
 
     expect(page).to have_content 'Casamento'
@@ -138,7 +138,7 @@ describe 'User access his own buffet page to create a event' do
     event2 = Event.create!(name: 'Evento Corporativo', description: 'Buffet com estilo mais profissional para eventos de empresa', min_qtd: 40, max_qtd: 100,
                           duration: 360, menu: 'Canapés', buffet_id: buffet2.id)
     
-    login_as(user)
+    login_as user, scope: :user
     visit my_buffet_buffets_path
 
     expect(page).to have_content 'Casamento'

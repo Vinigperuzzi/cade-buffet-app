@@ -34,7 +34,7 @@ describe 'User edit a price for an event' do
     price = Price.create!(base_price: 5000, sp_base_price:6000, sp_additional_person:500,
                           additional_person:200, sp_extra_hour:30, extra_hour:20, event_id: event.id)
     
-    login_as(user2)
+    login_as user2, scope: :user
     visit edit_event_price_path(event_id: event.id, id: price.id)
 
     expect(current_path).to eq root_path
@@ -54,7 +54,7 @@ describe 'User edit a price for an event' do
     price = Price.create!(base_price: 5000, sp_base_price:6000, sp_additional_person:500,
                           additional_person:200, sp_extra_hour:30, extra_hour:20, event_id: event.id)
 
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     click_on 'Meu Buffet'
     click_on 'Mostrar Detalhes'
@@ -78,7 +78,7 @@ describe 'User edit a price for an event' do
     price = Price.create!(base_price: 5000, sp_base_price:6000, sp_additional_person:500,
                           additional_person:200, sp_extra_hour:30, extra_hour:20, event_id: event.id)
 
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     click_on 'Meu Buffet'
     click_on 'Mostrar Detalhes'
@@ -102,7 +102,7 @@ describe 'User edit a price for an event' do
     price = Price.create!(base_price: 5000, sp_base_price:6000, sp_additional_person:500,
                           additional_person:200, sp_extra_hour:30, extra_hour:20, event_id: event.id)
     
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     click_on 'Meu Buffet'
     click_on 'Mostrar Detalhes'

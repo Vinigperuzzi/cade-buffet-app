@@ -29,7 +29,7 @@ describe 'User edit its own buffet' do
                           payment_method: 'Dinheiro', description: 'Doces e tortas para alegrara sua vida')
     user2.update!(buffet_id: buffet2.id)
 
-    login_as(user1)
+    login_as user1, scope: :user
     visit edit_buffet_path(buffet2.id)
 
     expect(page).to have_content 'Editar o Buffet Vini'
@@ -44,7 +44,7 @@ describe 'User edit its own buffet' do
                           payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
     user.update!(buffet_id: buffet.id)
 
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     click_on 'Meu Buffet'
     click_on 'Editar Buffet'
@@ -63,7 +63,7 @@ describe 'User edit its own buffet' do
                           payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
     user.update!(buffet_id: buffet.id)
 
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     click_on 'Meu Buffet'
     click_on 'Editar Buffet'

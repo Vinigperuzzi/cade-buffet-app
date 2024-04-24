@@ -50,7 +50,7 @@ describe 'User authenticate itself' do
   it 'and logout' do
     user = User.create!(email: 'vinicius@email.com', password: 'password')
     
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     click_on 'Sair'
 
