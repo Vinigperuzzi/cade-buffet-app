@@ -9,12 +9,12 @@
         <div class="event-card-item"><strong>Capacidade Máxima:</strong> <%= event.max_qtd %></div>
         <% price = Price.find_by(event_id: event.id) %>
         <% if price %>
-          <div class="event-card-item"><strong>Preço Base:</strong> R$ <%= price.base_price %>,00</div>
-          <div class="event-card-item"><strong>Adicional por Pessoa:</strong> R$ <%= price.additional_person %>,00</div>
-          <div class="event-card-item"><strong>Adicional por Hora Extra:</strong> R$ <%= price.extra_hour %>,00</div>
-          <div class="event-card-item"><strong>Preço Base especial:</strong> R$ <%= price.sp_base_price %>,00</div>
-          <div class="event-card-item"><strong>Adicional por Pessoa especial:</strong> R$ <%= price.sp_additional_person %>,00</div>
-          <div class="event-card-item"><strong>Adicional por Hora Extra especial:</strong> R$ <%= price.sp_extra_hour %>,00</div>
+          <div class="event-card-item"><strong>A partir de:</strong> R$ <%= price.base_price %>,00</div>
+          <!-- div class="event-card-item"><strong>Adicional por Pessoa:</strong> R$ <%= price.additional_person %>,00</div-->
+          <!--div class="event-card-item"><strong>Adicional por Hora Extra:</strong> R$ <%= price.extra_hour %>,00</div-->
+          <!--div class="event-card-item"><strong>Preço Base especial:</strong> R$ <%= price.sp_base_price %>,00</div-->
+          <!--div class="event-card-item"><strong>Adicional por Pessoa especial:</strong> R$ <%= price.sp_additional_person %>,00</div-->
+          <!--div class="event-card-item"><strong>Adicional por Hora Extra especial:</strong> R$ <%= price.sp_extra_hour %>,00</div-->
         <% else %>
           <div class="event-card-item">Valor ainda não informado</div>
         <% end %>

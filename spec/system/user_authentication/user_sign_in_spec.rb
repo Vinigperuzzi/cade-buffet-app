@@ -1,6 +1,18 @@
 require 'rails_helper'
 
 describe 'User authenticate itself' do
+  it "and the account aren't registered yet" do
+    visit root_path
+    click_on 'Entrar'
+    click_on 'Login como Dono de Buffet'
+    within('main form') do
+      fill_in 'E-mail', with: 'vinicius@email.com'
+      fill_in 'Senha', with: 'password'
+      click_on 'Entrar'
+    end
+    expect(page).to have_content "E-mail ou senha inválidos."
+  end
+
   it 'with success but before register a buffet' do
     User.create!(email: 'vinicius@email.com', password: 'password')
 

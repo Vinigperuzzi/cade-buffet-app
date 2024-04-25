@@ -39,6 +39,9 @@
           <% if user_signed_in? %>
             <p>Conta: <%= current_user.email %></p>
             <p><%= button_to 'Sair', destroy_user_session_path, method: :delete %></p>
+          <% elsif customer_signed_in? %>
+            <p>Logado como: <%= current_customer.name %> <%= "<#{current_customer.email}>" %></p>
+            <p><%= button_to 'Sair', destroy_user_session_path, method: :delete %></p>
           <% else %>
             <p><%= button_to 'Entrar', signup_choice_path, method: :get %></p>
           <% end %>

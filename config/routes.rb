@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :customers, path: 'customers', controllers: { sessions: "customers/sessions" }
+  devise_for :customers, path: 'customers', controllers: { sessions: "customers/sessions", registrations: "customers/registrations" }
   devise_for :users, path: 'users', controllers: { sessions: "users/sessions" }
   root to: "home#index"
   get '/signup_choice', to: 'home#signup'

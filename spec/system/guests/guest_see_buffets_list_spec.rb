@@ -66,4 +66,9 @@ describe "Guest see the buffet's list" do
     expect(page).to have_content 'Métodos de Pagamento: Pix, Débito, Crédito, Dinheiro'
     expect(page).not_to have_content 'Vinícius Gourmet alimentos'
   end
+
+  it 'and see in alphabetic order by name' do
+    pending 'Fazer a ordem alfabética'
+    expect(true).to eq false
+  end
 end
