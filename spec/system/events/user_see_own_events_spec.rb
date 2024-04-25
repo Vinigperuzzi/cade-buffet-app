@@ -23,7 +23,7 @@ describe 'User sees details of an event' do
     event = Event.create!(name: 'Casamento', description: 'Serviço de mesa completo para casamentos', min_qtd: 20, max_qtd: 40,
                             duration: 250, menu: 'Frutos do Mar', buffet_id: buffet.id)
 
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     click_on 'Meu Buffet'
     click_on 'Mostrar Detalhes'
@@ -50,7 +50,7 @@ describe 'User sees details of an event' do
     event = Event.create!(name: 'Casamento', description: 'Serviço de mesa completo para casamentos', min_qtd: 20, max_qtd: 40,
                             duration: 250, menu: 'Frutos do Mar', buffet_id: buffet.id)
 
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     click_on 'Meu Buffet'
     click_on 'Mostrar Detalhes'
@@ -74,7 +74,7 @@ describe 'User sees details of an event' do
                           payment_method: 'Pix, Dinheiro', description: 'Tortas e bolos feitos com amor')
     user2.update!(buffet_id: buffet2.id)
 
-    login_as(user2)
+    login_as user2, scope: :user
     visit event_path(event.id)
 
     expect(page).not_to have_content 'Editar Evento'

@@ -92,6 +92,7 @@ GEM
       xpath (~> 3.2)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
+    cpf_cnpj (0.5.0)
     crass (1.0.6)
     date (3.3.4)
     debug (1.9.2)
@@ -257,6 +258,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
+  cpf_cnpj
   debug
   devise
   puma (>= 5.0)

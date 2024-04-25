@@ -11,7 +11,7 @@ describe 'User deletes a event' do
     event = Event.create!(name: 'Casamento', description: 'Serviço de mesa completo para casamentos', min_qtd: 20, max_qtd: 40,
                             duration: 250, menu: 'Frutos do Mar', buffet_id: buffet.id)
       
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     click_on 'Meu Buffet'
     click_on 'Mostrar Detalhes'
@@ -32,7 +32,7 @@ describe 'User deletes a event' do
     price = Price.create!(base_price: 5000, sp_base_price:6000, sp_additional_person:500,
                           additional_person:200, sp_extra_hour:30, extra_hour:20, event_id: event.id)
 
-    login_as(user)
+    login_as user, scope: :user
     visit root_path
     click_on 'Meu Buffet'
     click_on 'Mostrar Detalhes'

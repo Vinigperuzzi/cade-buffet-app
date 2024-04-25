@@ -5,7 +5,7 @@ class HomeController < ApplicationController
 
   def signup
   end
-
+  
   private
 
   def check_user_have_buffet
