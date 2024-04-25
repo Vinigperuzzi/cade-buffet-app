@@ -1,13 +1,9 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :show
 
   def show
     @event = Event.find(params[:id])
-    unless current_user.nil?
-      @buffet = Buffet.find(current_user.buffet_id)
-    else
-      @buffet = Buffet.find(params[:id])
-    end
+    @buffet = Buffet.find(@event.buffet_id)
     @price = Price.where(event_id: @event.id).first
   end
 

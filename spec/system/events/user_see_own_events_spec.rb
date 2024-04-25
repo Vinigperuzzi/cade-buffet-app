@@ -10,7 +10,17 @@ describe 'User sees details of an event' do
                             duration: 250, menu: 'Frutos do Mar', buffet_id: buffet.id)
     visit event_path(event.id)
 
-    expect(current_path).to eq new_user_session_path
+    expect(current_path).to eq event_path(event)
+    expect(page).to have_content 'Nome: Casamento'
+    expect(page).to have_content 'Descrição: Serviço de mesa completo para casamentos'
+    expect(page).to have_content 'Quantidade mínima de pessoas: 20'
+    expect(page).to have_content 'Quantidade máxima de pessoas: 40'
+    expect(page).to have_content 'Duração: 250'
+    expect(page).to have_content 'Cardápio: Frutos do Mar'
+    expect(page).to have_content 'Bebidas Alcoólicas: Não disponíveis'
+    expect(page).to have_content 'Decoração: Não disponível'
+    expect(page).to have_content 'Serviço de Estacionamento: Não disponível'
+    expect(page).to have_content 'Exclusivo no local: Evento pode ser feito em qualquer outro local adequado'
   end
 
   it 'and are authenticated' do
