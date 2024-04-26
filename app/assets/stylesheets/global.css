@@ -23,6 +23,7 @@ header nav {
   align-items: center;
   width: 100vw;
   height: 90px;
+  margin-top: 10px;
 }
 
 header nav form {
@@ -324,4 +325,16 @@ input[type="checkbox"]:checked {
 
 .show-details-button:hover {
   background-color: #2980b9;
+}
+
+#album-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+img {
+  border-radius: 10px;
+  margin: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }

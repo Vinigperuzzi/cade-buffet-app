@@ -85,7 +85,9 @@
 </div>
 
 <% if @album.present? and @album.images.attached? %>
-  <% @album.images.each do |image| %>
-    <%= image_tag image, height: 200 %>
-  <% end %>
+  <div id="album-container">
+    <% @album.images.each do |image| %>
+      <%= image_tag image, height: 200 %>
+    <% end %>
+  </div>
 <% end %>
