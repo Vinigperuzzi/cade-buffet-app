@@ -76,7 +76,7 @@ describe "Guest see the buffet's list" do
                           register_number: '98746456000145', phone: '53 991535353', email: 'babi@miau.com',
                           address: 'Rua dos gatos, 700', district: 'Centro', state: 'RS', city: 'Piratini',
                           payment_method: 'Pix, Débito, Crédito, Dinheiro,', description: 'Serviço de Buffet saudável para pets')
-    buffet2 = Buffet.create!(name: 'Agora na mesa', corporate_name: 'Buffet para eventos LTDA', 
+    buffet3 = Buffet.create!(name: 'Agora na mesa', corporate_name: 'Buffet para eventos LTDA', 
                           register_number: '98732456000145', phone: '53 991535353', email: 'namesa@miau.com',
                           address: 'Rua da praça, 700', district: 'Centro', state: 'RS', city: 'Canguçu',
                           payment_method: 'Pix, Débito, Crédito, Dinheiro,', description: 'Serviço de buffet expresso e rápido')
@@ -85,18 +85,100 @@ describe "Guest see the buffet's list" do
     click_on 'Buscar'
     within('[class="event-card-container"]') do
       within('div:nth-child(1)') do
-      expect(page).to have_content 'Agora na mesa'
-      expect(page).to have_content 'Canguçu - RS'
+        expect(page).to have_content 'Agora na mesa'
+        expect(page).to have_content 'Canguçu - RS'
+      end
+      within('div:nth-child(2)') do
+        expect(page).to have_content 'Potinho de Ração'
+        expect(page).to have_content 'Piratini - RS'
+      end
+      within('div:nth-child(3)') do
+        expect(page).to have_content 'Vini'
+        expect(page).to have_content 'Pelotas - RS'
+      end
     end
-    within('div:nth-child(2)') do
-      expect(page).to have_content 'Potinho de Ração'
-      expect(page).to have_content 'Piratini - RS'
-    end
-    within('div:nth-child(3)') do
+  end
+
+  it 'and search for a specific buffet name' do
+    buffet1 = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
+                          register_number: '12456456000145', phone: '53 991814646', email: 'vinigperuzzi@gourmet.com',
+                          address: 'Estrada do Laranjal, 695', district: 'Laranjal', state: 'RS', city: 'Pelotas',
+                          payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
+    buffet2 = Buffet.create!(name: 'Potinho de Ração', corporate_name: 'Babi festas e eventos', 
+                          register_number: '98746456000145', phone: '53 991535353', email: 'babi@miau.com',
+                          address: 'Rua dos gatos, 700', district: 'Centro', state: 'RS', city: 'Piratini',
+                          payment_method: 'Pix, Débito, Crédito, Dinheiro,', description: 'Serviço de Buffet saudável para pets')
+    buffet3 = Buffet.create!(name: 'Agora na mesa', corporate_name: 'Buffet para eventos LTDA', 
+                          register_number: '98732456000145', phone: '53 991535353', email: 'namesa@miau.com',
+                          address: 'Rua da praça, 700', district: 'Centro', state: 'RS', city: 'Canguçu',
+                          payment_method: 'Pix, Débito, Crédito, Dinheiro,', description: 'Serviço de buffet expresso e rápido')
+
+    visit root_path
+    fill_in 'query', with: 'Vini'
+    click_on 'Buscar'
+    within('[class="event-card-container"]') do
       expect(page).to have_content 'Vini'
       expect(page).to have_content 'Pelotas - RS'
+      expect(page).not_to have_content 'Potinho de Ração'
+      expect(page).not_to have_content 'Piratini - RS'
+      expect(page).not_to have_content 'Agora na mesa'
+      expect(page).not_to have_content 'Canguçu - RS'
     end
+  end
+
+  it 'and search for a specific buffet city' do
+    buffet1 = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
+                          register_number: '12456456000145', phone: '53 991814646', email: 'vinigperuzzi@gourmet.com',
+                          address: 'Estrada do Laranjal, 695', district: 'Laranjal', state: 'RS', city: 'Pelotas',
+                          payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
+    buffet2 = Buffet.create!(name: 'Potinho de Ração', corporate_name: 'Babi festas e eventos', 
+                          register_number: '98746456000145', phone: '53 991535353', email: 'babi@miau.com',
+                          address: 'Rua dos gatos, 700', district: 'Centro', state: 'RS', city: 'Piratini',
+                          payment_method: 'Pix, Débito, Crédito, Dinheiro,', description: 'Serviço de Buffet saudável para pets')
+    buffet3 = Buffet.create!(name: 'Agora na mesa', corporate_name: 'Buffet para eventos LTDA', 
+                          register_number: '98732456000145', phone: '53 991535353', email: 'namesa@miau.com',
+                          address: 'Rua da praça, 700', district: 'Centro', state: 'RS', city: 'Canguçu',
+                          payment_method: 'Pix, Débito, Crédito, Dinheiro,', description: 'Serviço de buffet expresso e rápido')
+
+    visit root_path
+    fill_in 'query', with: 'Pelotas'
+    click_on 'Buscar'
+    within('[class="event-card-container"]') do
+      expect(page).to have_content 'Vini'
+      expect(page).to have_content 'Pelotas - RS'
+      expect(page).not_to have_content 'Potinho de Ração'
+      expect(page).not_to have_content 'Piratini - RS'
+      expect(page).not_to have_content 'Agora na mesa'
+      expect(page).not_to have_content 'Canguçu - RS'
     end
-    
+  end
+
+  it 'and search for a specific buffet city' do
+    buffet1 = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
+                          register_number: '12456456000145', phone: '53 991814646', email: 'vinigperuzzi@gourmet.com',
+                          address: 'Estrada do Laranjal, 695', district: 'Laranjal', state: 'RS', city: 'Pelotas',
+                          payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
+    buffet2 = Buffet.create!(name: 'Potinho de Ração', corporate_name: 'Babi festas e eventos', 
+                          register_number: '98746456000145', phone: '53 991535353', email: 'babi@miau.com',
+                          address: 'Rua dos gatos, 700', district: 'Centro', state: 'RS', city: 'Piratini',
+                          payment_method: 'Pix, Débito, Crédito, Dinheiro,', description: 'Serviço de Buffet saudável para pets')
+    buffet3 = Buffet.create!(name: 'Agora na mesa', corporate_name: 'Buffet para eventos LTDA', 
+                          register_number: '98732456000145', phone: '53 991535353', email: 'namesa@miau.com',
+                          address: 'Rua da praça, 700', district: 'Centro', state: 'RS', city: 'Canguçu',
+                          payment_method: 'Pix, Débito, Crédito, Dinheiro,', description: 'Serviço de buffet expresso e rápido')
+    event1 = Event.create!(name: 'Casamento', description: 'Serviço de mesa completo para casamentos', min_qtd: 20, max_qtd: 40,
+                            duration: 250, menu: 'Frutos do Mar', buffet_id: buffet1.id)
+
+    visit root_path
+    fill_in 'query', with: 'Casamento'
+    click_on 'Buscar'
+    within('[class="event-card-container"]') do
+      expect(page).to have_content 'Vini'
+      expect(page).to have_content 'Pelotas - RS'
+      expect(page).not_to have_content 'Potinho de Ração'
+      expect(page).not_to have_content 'Piratini - RS'
+      expect(page).not_to have_content 'Agora na mesa'
+      expect(page).not_to have_content 'Canguçu - RS'
+    end
   end
 end
