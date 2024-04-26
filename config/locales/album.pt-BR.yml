@@ -1,0 +1,12 @@
+pt-BR:
+  image: 'Imagem'
+  images: 'Imagens'
+  activerecord:
+    models:
+      album:
+      one: 'Álbum'
+      other: 'Álbuns'
+    attributes:
+      album:
+        image: 'Imagem'
+        images: 'Imagens'

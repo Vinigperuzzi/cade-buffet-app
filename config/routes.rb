@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   end
   resources :events, only: [:new, :create, :show, :edit, :update, :destroy] do
     resources :prices, only: [:new, :create, :edit, :update]
+    resources :albums, only: [:new, :create, :edit, :update]
   end
 end

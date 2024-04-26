@@ -1,0 +1,9 @@
+<%= form_with(model: [@event, @album]) do |f| %>
+  <div class="field">
+    <%= f.label :images %>
+    <%= f.file_field :images, multiple: true %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Salvar Álbum' %>
+  </div>
+<% end %>
