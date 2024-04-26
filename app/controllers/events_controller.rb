@@ -5,6 +5,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @buffet = Buffet.find(@event.buffet_id)
     @price = Price.where(event_id: @event.id).first
+    @album = Album.find_by(event_id: @event.id)
   end
 
   def new
