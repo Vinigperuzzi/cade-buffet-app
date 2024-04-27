@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @buffet = Buffet.find(@event.buffet_id)
-    @price = Price.where(event_id: @event.id).first
+    @price = Price.find_by(event_id: @event.id)
     @album = Album.find_by(event_id: @event.id)
   end
 
@@ -16,7 +16,8 @@ class EventsController < ApplicationController
     @event = Event.new(get_params)
     @event.buffet_id = current_user.buffet_id
     if @event.save
-      redirect_to my_buffet_buffets_path, notice: 'Evento cadastrado com sucesso.'
+      message = 'Evento cadastrado com sucesso.'
+      redirect_to my_buffet_buffets_path, notice: message
     else
       flash.now[:alert] = 'Não foi possível registrar o Evento.'
       render :new
@@ -25,7 +26,12 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
-    return redirect_to my_buffet_buffets_path, alert: 'Você não tem permissão para editar esse evento.' unless @event.buffet_id == current_user.buffet_id
+
+    message = 'Você não tem permissão para editar esse evento.'
+    return (
+      redirect_to my_buffet_buffets_path, alert: message
+      ) unless @event.buffet_id == current_user.buffet_id
+
     @buffet = Buffet.find(current_user.buffet_id)
   end
 
@@ -33,7 +39,8 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     return unless @event.buffet_id == current_user.buffet_id
     if @event.update(get_params)
-      redirect_to my_buffet_buffets_path, notice: 'Evento atualizado com sucesso.'
+      message = 'Evento atualizado com sucesso.'
+      redirect_to my_buffet_buffets_path, notice: message
     else
       @buffet = Buffet.find(current_user.buffet_id)
       flash.now[:alert] = 'Não foi possível atualizar o Evento.'
@@ -54,6 +61,8 @@ class EventsController < ApplicationController
   private
 
   def get_params
-    params.require(:event).permit(:name, :description, :min_qtd, :max_qtd, :duration, :menu, :drinks, :decoration, :valet, :only_local)
+    params.require(:event).permit(:name, :description, :min_qtd, :max_qtd,
+                                  :duration, :menu, :drinks, :decoration,
+                                  :valet, :only_local)
   end
 end
