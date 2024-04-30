@@ -1,0 +1,45 @@
+<div class="buffet-card">
+  <div class="h1-info">
+    <h1>Exibindo o Pedido <%= @order.code %></h1>
+  </div>
+
+  <dl class="info-list">
+    <dt>Nome do Buffet:</dt>
+    <dd><%= Buffet.find_by(id: @order.buffet_id).name %></dd>
+
+    <dt>Nome do Evento:</dt>
+    <dd><%= Event.find_by(id: @order.event_id).name %></dd>
+
+    <dt>Data do Evento:</dt>
+    <dd><%= I18n.localize(@order.event_date) %></dd>
+
+    <dt>Quantidade de pessoas:</dt>
+    <dd><%= @order.estimated_qtd %></dd>
+
+    <dt>Código:</dt>
+    <dd><%= @order.code %></dd>
+
+    <% if @order.out_doors %>
+      <dt>Deve ser realizado no endereço:</dt>
+      <dd><%= @order.address %></dd>
+    <% else %>
+      <dt>deve ser realizado no endereço:</dt>
+      <dd>No próprio Buffet</dd>
+    <% end %>
+
+    <dt>Status do pedido:</dt>
+    <dd><%= t(@order.order_status) %></dd>
+
+    <dt>Valor final:</dt>
+    <dd><%= @order.final_price %></dd>
+
+    <dt>Prazo final para confirmação e pagamento:</dt>
+    <dd><%= I18n.localize(@order.payment_final_date) if @order.payment_final_date %></dd>
+
+    <dt>Acréscimos:</dt>
+    <dd><%= @order.extra_tax %></dd>
+
+    <dt>Descontos:</dt>
+    <dd><%= @order.discount %></dd>
+  </dl>
+</div>

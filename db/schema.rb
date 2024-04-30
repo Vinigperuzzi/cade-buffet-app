@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_26_020126) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_30_045332) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -94,6 +94,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_020126) do
     t.index ["buffet_id"], name: "index_events_on_buffet_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer "buffet_id", null: false
+    t.integer "event_id", null: false
+    t.date "event_date"
+    t.integer "estimated_qtd"
+    t.string "event_details"
+    t.string "code", default: "0"
+    t.string "address"
+    t.integer "order_status"
+    t.integer "final_price"
+    t.date "payment_final_date"
+    t.integer "extra_tax"
+    t.integer "discount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "customer_id", null: false
+    t.boolean "out_doors"
+    t.index ["buffet_id"], name: "index_orders_on_buffet_id"
+    t.index ["code"], name: "index_orders_on_code", unique: true
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["event_id"], name: "index_orders_on_event_id"
+  end
+
   create_table "prices", force: :cascade do |t|
     t.integer "base_price"
     t.integer "additional_person"
@@ -125,6 +148,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_020126) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "albums", "events"
   add_foreign_key "events", "buffets"
+  add_foreign_key "orders", "buffets"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "events"
   add_foreign_key "prices", "events"
   add_foreign_key "users", "buffets"
 end

@@ -1,0 +1,32 @@
+pt-BR:
+  event_date: 'Data do evento'
+  estimated_qtd: 'Quantidade estimada de pessoas'
+  event_details: 'Detalhes do evento'
+  code: 'Código'
+  address: 'Endereço'
+  order_status: 'Status do pedido'
+  final_price: 'Preço final'
+  payment_final_date: 'Prazo máximo para pagamento'
+  extra_tax: 'Acréscimo'
+  discount: 'Desconto'
+  waiting: 'Aguardando avaliação do buffet'
+  confirmed: 'Confirmado'
+  canceled: 'Cancelado'
+  evaluated: 'Avaliado'
+  activerecord:
+    models:
+      order:
+      one: 'Pedido'
+      others: 'Pedidos'
+    attributes:
+      order:
+        event_date: 'Data do evento'
+        estimated_qtd: 'Quantidade estimada de pessoas'
+        event_details: 'Detalhes do evento'
+        code: 'Código'
+        address: 'Endereço'
+        order_status: 'Status do pedido'
+        final_price: 'Preço final'
+        payment_final_date: 'Prazo máximo para pagamento'
+        extra_tax: 'Acréscimo'
+        discount: 'Desconto'
