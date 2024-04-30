@@ -1,0 +1,50 @@
+<%= form_with(model: [@event, @order]) do |f| %>
+  <div class="field">
+    <%= f.label :event_date %>
+    <%= f.date_field :event_date %>
+    <% if @order.errors[:event_date].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:event_date) %> <%= @order.errors[:event_date].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :estimated_qtd %>
+    <%= f.number_field :estimated_qtd %>
+    <% if @order.errors[:estimated_qtd].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:estimated_qtd) %> <%= @order.errors[:estimated_qtd].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :event_details %>
+    <%= f.text_field :event_details %>
+    <% if @order.errors[:event_details].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:event_details) %> <%= @order.errors[:event_details].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :out_doors, "Desejo realizar o evento fora do local do Buffet" %>
+    <%= f.check_box :out_doors %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address, "Endereço que o evento deve ser feito" %>
+    <%= f.text_field :address %>
+    <% if @order.errors[:address].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:address) %> <%= @order.errors[:address].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Salvar Pedido' %>
+  </div>
+<% end %>
