@@ -24,7 +24,7 @@
         <div id="navigation-buttons" class="flex-container">
           <% if user_signed_in? %>
             <p><%= link_to 'Meu Buffet', my_buffet_buffets_path %></p>
-            <p><%= link_to 'Pedidos', orders_path %></p>
+            <p><%= link_to 'Pedidos', user_index_orders_path %></p>
           <% else %>
             <% if customer_signed_in? %>
               <p><%= link_to 'Meus Pedidos', orders_path %></p>

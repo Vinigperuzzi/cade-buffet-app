@@ -3,6 +3,9 @@
     <h1>Exibindo o Pedido <%= @order.code %></h1>
   </div>
 
+  <% if user_signed_in? and @same_day_orders.length > 1 %>
+    <p class="alert">Você possui mais eventos agendados ou confirmados para essa mesma data.</p>
+  <% end %>
   <dl class="info-list">
     <dt>Nome do Buffet:</dt>
     <dd><%= Buffet.find_by(id: @order.buffet_id).name %></dd>

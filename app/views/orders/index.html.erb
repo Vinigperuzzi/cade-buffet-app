@@ -4,7 +4,7 @@
   <% @orders.each do |order| %>
     <div class="event-card">
       <div>
-        <h2 class="event-card-title"><strong>Data do Evento: </strong><%= order.event_date %></h2>
+        <h2 class="event-card-title"><strong>Data do Evento: </strong><%= I18n.localize(order.event_date) %></h2>
         <div class="event-card-description"><strong>Código: </strong><%= order.code %></div>
         <%= link_to 'Mostrar Detalhes', order_path(order.id), class: 'show-details-button' %>
       </div>

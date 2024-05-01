@@ -15,5 +15,9 @@ Rails.application.routes.draw do
     resources :orders, only: [:new, :create, :edit, :update]
   end
 
-  resources :orders, only: [:index, :show]
+  resources :orders, only: [:index, :show] do
+    collection do
+      get 'user_index'
+    end
+  end
 end

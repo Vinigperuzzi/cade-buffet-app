@@ -283,6 +283,22 @@ input[type="checkbox"]:checked {
   margin-top: 25px;
 }
 
+.order-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-type {
+  background-color: var(--lighter-color);
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
 .event-card-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
