@@ -86,7 +86,7 @@ class OrdersController < ApplicationController
   end
 
   def get_update_params
-    params.require(:order).permit(:payment_final_date, :extra_tax, :discount)
+    params.require(:order).permit(:payment_final_date, :extra_tax, :discount, :tax_description, :discount_description, :payment_form)
   end
 
   def authenticate_customer_or_user!

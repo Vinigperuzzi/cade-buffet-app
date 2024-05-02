@@ -13,6 +13,9 @@ pt-BR:
   confirmed: 'Confirmado'
   canceled: 'Cancelado'
   evaluated: 'Avaliado'
+  tax_description: 'Descrição da taxa extra'
+  discount_description: 'Descrição do desconto'
+  payment_form: 'Forma de pagamento'
   activerecord:
     models:
       order:
@@ -30,3 +33,6 @@ pt-BR:
         payment_final_date: 'Prazo máximo para pagamento'
         extra_tax: 'Acréscimo'
         discount: 'Desconto'
+        tax_description: 'Descrição da taxa extra'
+        discount_description: 'Descrição do desconto'
+        payment_form: 'Forma de pagamento'

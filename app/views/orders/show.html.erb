@@ -13,6 +13,9 @@
     <dt>Nome do Evento:</dt>
     <dd><%= Event.find_by(id: @order.event_id).name %></dd>
 
+    <dt>Detalhes do evento:</dt>
+    <dd><%= @order.event_details %></dd>
+
     <dt>Data do Evento:</dt>
     <dd><%= I18n.localize(@order.event_date) %></dd>
 
@@ -42,8 +45,17 @@
     <dt>Acréscimos:</dt>
     <dd><%= @order.extra_tax %></dd>
 
+    <dt>Descrição do acrésicmo:</dt>
+    <dd><%= @order.tax_description %></dd>
+
     <dt>Descontos:</dt>
     <dd><%= @order.discount %></dd>
+
+    <dt>Descrição do desconto:</dt>
+    <dd><%= @order.discount_description %></dd>
+
+    <dt>Forma de pagamento:</dt>
+    <dd><%= @order.payment_form %></dd>
   </dl>
 </div>
 

@@ -28,12 +28,45 @@
     </div>
 
     <div class="field">
+      <%= f.label :tax_description %>
+      <%= f.text_field :tax_description %>
+      <div class="buffet-advise"></div>
+      <% if @order.errors[:tax_description].include?("não pode ficar em branco") %>
+        <div class="buffet-advise">
+          <%= t(:tax_description) %> <%= @order.errors[:tax_description].join(', ').strip %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="field">
       <%= f.label :discount %>
       <%= f.number_field :discount %>
       <div class="buffet-advise" style="color: cadetblue;">Conceder desconto ao cliente</div>
       <% if @order.errors[:discount].include?("não pode ficar em branco") %>
         <div class="buffet-advise">
           <%= t(:discount) %> <%= @order.errors[:discount].join(', ').strip %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :discount_description %>
+      <%= f.text_field :discount_description %>
+      <div class="buffet-advise"></div>
+      <% if @order.errors[:discount_description].include?("não pode ficar em branco") %>
+        <div class="buffet-advise">
+          <%= t(:discount_description) %> <%= @order.errors[:discount_description].join(', ').strip %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :payment_form %>
+      <%= f.text_field :payment_form %>
+      <div class="buffet-advise"></div>
+      <% if @order.errors[:payment_form].include?("não pode ficar em branco") %>
+        <div class="buffet-advise">
+          <%= t(:payment_form) %> <%= @order.errors[:payment_form].join(', ').strip %>
         </div>
       <% end %>
     </div>

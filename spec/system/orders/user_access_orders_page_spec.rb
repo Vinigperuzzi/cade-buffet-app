@@ -602,7 +602,10 @@ describe "User see order's list" do
     end
     fill_in "Prazo máximo para pagamento", with: ""
     fill_in "Acréscimo", with: 500
+    fill_in "Descrição da taxa extra", with: 'Acréscimo pelo vestido de noiva'
     fill_in "Desconto", with: 200
+    fill_in "Descrição do desconto", with: 'Desconto pelo cupom do mês da noiva'
+    fill_in "Forma de pagamento", with: 'Pix'
     click_on 'Confirmar Pedido'
 
     expect(current_path).to eq order_path(order.id)
@@ -610,5 +613,8 @@ describe "User see order's list" do
     expect(page).to have_content "Prazo final para confirmação e pagamento: #{date}"
     expect(page).to have_content "Acréscimos: 500"
     expect(page).to have_content "Descontos: 200"
+    expect(page).to have_content "Descrição do acrésicmo: Acréscimo pelo vestido de noiva"
+    expect(page).to have_content "Descrição do desconto: Desconto pelo cupom do mês da noiva"
+    expect(page).to have_content "Forma de pagamento: Pix"
   end
 end
