@@ -46,3 +46,7 @@
     <dd><%= @order.discount %></dd>
   </dl>
 </div>
+
+<% if user_signed_in? and @order.waiting? %>
+  <%= render "evaluate_form" %>
+<% end %>

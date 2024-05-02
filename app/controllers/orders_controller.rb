@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  require "holidays"
   before_action :authenticate_customer!, only: [:new, :create, :index]
   before_action :authenticate_user!, only: [:user_index]
   before_action :authenticate_customer_or_user!, only: [:show]
@@ -15,9 +16,14 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @event = Event.find(@order.event_id)
+    message = 'Você não pode ver detalhes de pedidos de outras pessoas.'
+    redirect_to root_path, alert: message if customer_signed_in? and @order.customer_id != current_customer.id
+    redirect_to root_path, alert: message if user_signed_in? and @order.buffet_id != current_user.buffet_id
     if user_signed_in?
       @same_day_orders = Order.where(buffet_id: current_user.id, event_date: @order.event_date)
     end
+    @value = calculate_value
   end
   
   def new
@@ -42,11 +48,45 @@ class OrdersController < ApplicationController
     end
   end
 
+  def update
+    @order = Order.find(params[:id])
+    @order.update(get_update_params)
+    @order.payment_final_date = 3.days.from_now if @order.payment_final_date.nil?
+    @order.evaluated!
+    @order.save
+    redirect_to @order
+  end
+
   private
+
+  def calculate_value
+    day = @order.event_date
+    price = Price.find_by(event_id: @order.event_id)
+    return redirect_to user_index_orders_path, alert: "Você precisa cadastrar um preço para esse evento poder ser contratado." if price.nil?
+    aditional_people = 0
+    if @event.max_qtd < @order.estimated_qtd
+      aditional_people = @order.estimated_qtd - @event.max_qtd if @event.max_qtd < @order.estimated_qtd
+    end
+
+    if !Holidays.on(day, :br).empty? || day.saturday? || day.sunday?
+      base = price.sp_base_price
+      aditional = price.sp_additional_person
+
+      return value = base + (aditional_people * aditional)
+    end
+
+    base = price.base_price
+    aditional = price.additional_person
+    value = base + (aditional_people * aditional)
+  end
 
   def get_params
     params.require(:order).permit(:event_date, :estimated_qtd,
                                   :event_details, :address, :out_doors)
+  end
+
+  def get_update_params
+    params.require(:order).permit(:payment_final_date, :extra_tax, :discount)
   end
 
   def authenticate_customer_or_user!

@@ -1,0 +1,45 @@
+<div class="evaluated-form-card">
+  <%= form_with(model: [@event, @order]) do |f| %>
+
+  <div class="field">
+    <label>O valor do evento está calculado em <%= @value %> reais.</label>
+    <div class="buffet-advise" style="color: cadetblue;">Esses valores são calculados levando em consideração o dia da semana e a quantidade de pessoas.</div>
+  </div>
+
+  <div class="field">
+      <%= f.label :payment_final_date %>
+      <%= f.date_field :payment_final_date %>
+      <% if @order.errors[:payment_final_date].include?("não pode ficar em branco") %>
+        <div class="buffet-advise">
+          <%= t(:payment_final_date) %> <%= @order.errors[:payment_final_date].join(', ').strip %>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="field">
+      <%= f.label :extra_tax %>
+      <%= f.number_field :extra_tax %>
+      <div class="buffet-advise" style="color: cadetblue;">Cobrar taxa extra do cliente</div>
+      <% if @order.errors[:extra_tax].include?("não pode ficar em branco") %>
+        <div class="buffet-advise">
+          <%= t(:extra_tax) %> <%= @order.errors[:extra_tax].join(', ').strip %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :discount %>
+      <%= f.number_field :discount %>
+      <div class="buffet-advise" style="color: cadetblue;">Conceder desconto ao cliente</div>
+      <% if @order.errors[:discount].include?("não pode ficar em branco") %>
+        <div class="buffet-advise">
+          <%= t(:discount) %> <%= @order.errors[:discount].join(', ').strip %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="actions"></div>
+      <%= f.submit 'Confirmar Pedido' %>
+    </div>
+  <% end %>
+</div>

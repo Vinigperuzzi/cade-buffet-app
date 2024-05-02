@@ -354,3 +354,43 @@ img {
   margin: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
+
+.evaluated-form-card {
+  width: 50%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.evaluated-form-card .field {
+  margin-bottom: 20px;
+}
+
+.evaluated-form-card .field label {
+  display: block;
+  font-weight: bold;
+}
+
+.evaluated-form-card .buffet-advise {
+  color: #ff0000;
+  font-size: 14px;
+}
+
+.evaluated-form-card .actions {
+  text-align: center;
+}
+
+.evaluated-form-card input[type="submit"] {
+  background-color: var(--main-color);
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.evaluated-form-card input[type="submit"]:hover {
+  background-color: var(--lighter-color);
+}
