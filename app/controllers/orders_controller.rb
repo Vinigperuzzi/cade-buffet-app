@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   require "holidays"
   before_action :authenticate_customer!, only: [:new, :create, :index]
-  before_action :authenticate_user!, only: [:user_index]
-  before_action :authenticate_customer_or_user!, only: [:show]
+  before_action :authenticate_user!, only: [:user_index, :update]
+  before_action :authenticate_customer_or_user!, only: [:show, :confirm, :cancel]
 
   def index
     @orders = Order.where(customer_id: current_customer.id)
@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
     redirect_to root_path, alert: message if customer_signed_in? and @order.customer_id != current_customer.id
     redirect_to root_path, alert: message if user_signed_in? and @order.buffet_id != current_user.buffet_id
     if user_signed_in?
-      @same_day_orders = Order.where(buffet_id: current_user.id, event_date: @order.event_date)
+      @same_day_orders = Order.where(buffet_id: current_user.id, event_date: @order.event_date).where.not(order_status: :canceled)
     end
     @value = calculate_value
   end
@@ -56,11 +56,22 @@ class OrdersController < ApplicationController
       @order.evaluated!
       redirect_to @order
     else
-      @same_day_orders = Order.where(buffet_id: current_user.id, event_date: @order.event_date)
+      @same_day_orders = Order.where(buffet_id: current_user.id, event_date: @order.event_date).where.not(order_status: :canceled)
       flash.now[:alert] = 'Não foi possível atualizar o pedido.'
       render :show
     end
-    
+  end
+
+  def confirm
+    @order = Order.find(params[:id])
+    @order.confirmed!
+    redirect_to @order
+  end
+
+  def cancel
+    @order = Order.find(params[:id])
+    @order.canceled!
+    redirect_to @order
   end
 
   private
@@ -69,6 +80,7 @@ class OrdersController < ApplicationController
     day = @order.event_date
     price = Price.find_by(event_id: @order.event_id)
     return redirect_to user_index_orders_path, alert: "Você precisa cadastrar um preço para esse evento poder ser contratado." if price.nil?
+    aditional_people = 0
     aditional_people = @order.estimated_qtd - @event.min_qtd if @event.min_qtd <= @order.estimated_qtd
 
     if !Holidays.on(day, :br).empty? || day.saturday? || day.sunday?

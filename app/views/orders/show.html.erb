@@ -4,7 +4,7 @@
   </div>
 
   <% if user_signed_in? and @same_day_orders.length > 1 %>
-    <p class="alert">Você possui mais eventos agendados ou confirmados para essa mesma data.</p>
+    <p class="alert">Você já possui <%= @same_day_orders.length %> eventos agendados ou confirmados para essa mesma data.</p>
   <% end %>
   <dl class="info-list">
     <dt>Nome do Buffet:</dt>
@@ -57,6 +57,20 @@
     <dt>Forma de pagamento:</dt>
     <dd><%= @order.payment_form %></dd>
   </dl>
+</div>
+
+<div class="login-options" id="bottom-button">
+  <% if customer_signed_in? and @order.evaluated? %>
+    <%= link_to 'Confirmar', confirm_order_path, class: "home-login-button owner" %>
+  <% end %>
+
+  <% if customer_signed_in? and (@order.evaluated? or @order.confirmed?) %>
+    <%= link_to 'Cancelar', cancel_order_path, class: "home-login-button owner" %>
+  <% end %>
+
+  <% if user_signed_in? and @order.confirmed? %>
+    <%= link_to 'Cancelar', cancel_order_path, class: "home-login-button owner" %>
+  <% end %>
 </div>
 
 <% if user_signed_in? and (@order.waiting? || @order.evaluated?) %>

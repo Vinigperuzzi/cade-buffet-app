@@ -19,5 +19,9 @@ Rails.application.routes.draw do
     collection do
       get 'user_index'
     end
+    member do
+      get 'confirm'
+      get 'cancel'
+    end
   end
 end
