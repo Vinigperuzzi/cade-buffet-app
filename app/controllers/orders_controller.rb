@@ -24,6 +24,7 @@ class OrdersController < ApplicationController
       @same_day_orders = Order.where(buffet_id: current_user.id, event_date: @order.event_date).where.not(order_status: :canceled)
     end
     @value = calculate_value
+    @sp_day = not_business_day?
   end
   
   def new
@@ -50,8 +51,12 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
+    @event = @order.event
     if @order.update(get_update_params)
       @order.payment_final_date = 3.days.from_now if @order.payment_final_date.nil?
+      @order.extra_tax = 0 if @order.extra_tax.nil?
+      @order.discount = 0 if @order.discount.nil?
+      @order.final_price = calculate_value
       @order.save
       @order.evaluated!
       redirect_to @order
@@ -77,13 +82,12 @@ class OrdersController < ApplicationController
   private
 
   def calculate_value
-    day = @order.event_date
     price = Price.find_by(event_id: @order.event_id)
     return redirect_to user_index_orders_path, alert: "Você precisa cadastrar um preço para esse evento poder ser contratado." if price.nil?
     aditional_people = 0
     aditional_people = @order.estimated_qtd - @event.min_qtd if @event.min_qtd <= @order.estimated_qtd
 
-    if !Holidays.on(day, :br).empty? || day.saturday? || day.sunday?
+    if not_business_day?
       base = price.sp_base_price
       aditional = price.sp_additional_person
 
@@ -93,6 +97,11 @@ class OrdersController < ApplicationController
     base = price.base_price
     aditional = price.additional_person
     value = base + (aditional_people * aditional)
+  end
+
+  def not_business_day?
+    day = @order.event_date
+    !Holidays.on(day, :br).empty? || day.saturday? || day.sunday?
   end
 
   def get_params

@@ -271,7 +271,7 @@ describe "User see order's list" do
     customer = Customer.create!(email: 'cliente@email.com', password: 'password', name: 'cliente', cpf: '479.111.310-15')
     order = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: 1.day.from_now, estimated_qtd: 30,
                           event_details: 'Esse evento deve possuir toda a temática com corações rosa', address: '', order_status: :waiting,
-                          final_price: nil, extra_tax: nil, discount: nil, customer_id: customer.id, out_doors: false)
+                          final_price: 11000, extra_tax: 1000, discount: 500, customer_id: customer.id, out_doors: false)
     
     login_as user, scope: :user
     visit root_path
@@ -286,7 +286,6 @@ describe "User see order's list" do
     expect(page).to have_content "Código: #{order.code}"
     expect(page).to have_content 'deve ser realizado no endereço: No próprio Buffet'
     expect(page).to have_content 'Status do pedido: Aguardando avaliação do buffet'
-    expect(page).to have_content 'Valor final:'
     expect(page).to have_content 'Prazo final para confirmação e pagamento:'
     expect(page).to have_content 'Acréscimos:'
     expect(page).to have_content 'Descontos:'
@@ -347,7 +346,7 @@ describe "User see order's list" do
     customer = Customer.create!(email: 'cliente@email.com', password: 'password', name: 'cliente', cpf: '479.111.310-15')
     order = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: Date.new(2039, 5, 1), estimated_qtd: 30,
                           event_details: 'Esse evento deve possuir toda a temática com corações rosa', address: '', order_status: :confirmed,
-                          final_price: "16000", extra_tax: nil, discount: nil, customer_id: customer.id, out_doors: false)
+                          final_price: 11000, extra_tax: 1000, discount: 500, customer_id: customer.id, out_doors: false)
 
     login_as user, scope: :user
     visit root_path
@@ -688,7 +687,7 @@ describe "User see order's list" do
     customer = Customer.create!(email: 'cliente@email.com', password: 'password', name: 'cliente', cpf: '479.111.310-15')
     order = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: Date.new(2134, 5, 1), estimated_qtd: 30,
                           event_details: 'Esse evento deve possuir toda a temática com corações rosa', address: '', order_status: :evaluated,
-                          final_price: "16000", extra_tax: nil, discount: nil, customer_id: customer.id, out_doors: false)
+                          final_price: 11000, extra_tax: 1000, discount: 500, customer_id: customer.id, out_doors: false)
 
     login_as user, scope: :user
     visit root_path
@@ -715,7 +714,7 @@ describe "User see order's list" do
     customer = Customer.create!(email: 'cliente@email.com', password: 'password', name: 'cliente', cpf: '479.111.310-15')
     order = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: Date.new(2134, 5, 1), estimated_qtd: 30,
                           event_details: 'Esse evento deve possuir toda a temática com corações rosa', address: '', order_status: :confirmed,
-                          final_price: "16000", extra_tax: nil, discount: nil, customer_id: customer.id, out_doors: false)
+                          final_price: 11000, extra_tax: 1000, discount: 500, customer_id: customer.id, out_doors: false)
 
     login_as user, scope: :user
     visit root_path
@@ -742,7 +741,7 @@ describe "User see order's list" do
     customer = Customer.create!(email: 'cliente@email.com', password: 'password', name: 'cliente', cpf: '479.111.310-15')
     order = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: Date.new(2134, 5, 1), estimated_qtd: 30,
                           event_details: 'Esse evento deve possuir toda a temática com corações rosa', address: '', order_status: :confirmed,
-                          final_price: "16000", extra_tax: nil, discount: nil, customer_id: customer.id, out_doors: false)
+                          final_price: 11000, extra_tax: 1000, discount: 500, customer_id: customer.id, out_doors: false)
 
     login_as user, scope: :user
     visit root_path

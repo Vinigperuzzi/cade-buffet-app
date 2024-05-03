@@ -8,10 +8,10 @@
   <% end %>
   <dl class="info-list">
     <dt>Nome do Buffet:</dt>
-    <dd><%= Buffet.find_by(id: @order.buffet_id).name %></dd>
+    <dd><%= @order.buffet.name %></dd>
 
     <dt>Nome do Evento:</dt>
-    <dd><%= Event.find_by(id: @order.event_id).name %></dd>
+    <dd><%= @order.event.name %></dd>
 
     <dt>Detalhes do evento:</dt>
     <dd><%= @order.event_details %></dd>
@@ -36,8 +36,18 @@
     <dt>Status do pedido:</dt>
     <dd><%= t(@order.order_status) %></dd>
 
-    <dt>Valor final:</dt>
-    <dd><%= @order.final_price %></dd>
+    <% unless @order.waiting? %>
+      <dt>Valor do evento: </dt>
+      <dd><%= @order.final_price%></dd>
+      <dt>Valor total (com acréscimos e descontos):</dt>
+      <dd><%= @order.final_price + @order.extra_tax - @order.discount %></dd>
+      <% if @sp_day %>
+        <% hour_fine = @order.event.price.sp_extra_hour %>
+      <% else %>
+        <% hour_fine = @order.event.price.extra_hour %>
+      <% end %>
+      <p class="alert">Lembrando que há uma multa de <%= hour_fine %> reais para cada hora passada.</p>
+    <% end %>
 
     <dt>Prazo final para confirmação e pagamento:</dt>
     <dd><%= I18n.localize(@order.payment_final_date) if @order.payment_final_date %></dd>
