@@ -4,8 +4,8 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @buffet = Buffet.find(@event.buffet_id)
-    @price = Price.find_by(event_id: @event.id)
-    @album = Album.find_by(event_id: @event.id)
+    @price = @event.price
+    @album = @event.album
   end
 
   def new

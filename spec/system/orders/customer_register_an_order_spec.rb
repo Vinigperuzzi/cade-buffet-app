@@ -81,7 +81,7 @@ describe "Customer create an order" do
     click_on 'Mostrar Detalhes'
     click_on 'Realizar Pedido'
     fill_in 'Data do evento', with: 1.day.from_now
-    fill_in 'Quantidade estimada de pessoas', with: '500'
+    fill_in 'Quantidade estimada de pessoas', with: '30'
     fill_in 'Detalhes do evento', with: 'Formatura do meu filho em Ciência da Computação, gostaria de ter uma decoração da cultura Geek.'
     click_on 'Salvar Pedido'
 

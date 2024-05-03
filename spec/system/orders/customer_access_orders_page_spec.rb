@@ -20,11 +20,11 @@ describe "Customer see order's list" do
     customer = Customer.create!(email: 'cliente@email.com', password: 'password', name: 'cliente1', cpf: '479.111.310-15')
     customer2 = Customer.create!(email: 'customer@email.com', password: 'password2', name: 'cliente2', cpf: '283.101.870-68')
 
-    order1 = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: 1.day.from_now, estimated_qtd: 200,
+    order1 = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: 1.day.from_now, estimated_qtd: 30,
                         event_details: 'Esse evento deve possuir toda a temática com corações rosa', address: '', order_status: :waiting,
                         final_price: nil, extra_tax: nil, discount: nil, customer_id: customer.id, out_doors: false)
     order1.valid?
-    order2 = Order.create!(buffet_id: buffet.id, event_id: event2.id, event_date: 1.day.from_now, estimated_qtd: 200,
+    order2 = Order.create!(buffet_id: buffet.id, event_id: event2.id, event_date: 1.day.from_now, estimated_qtd: 70,
                         event_details: 'Quero temática Geek para a formatura em Ciência da Computação', address: '', order_status: :waiting,
                         final_price: nil, extra_tax: nil, discount: nil, customer_id: customer2.id, out_doors: false)
     order2.valid?
@@ -54,11 +54,11 @@ describe "Customer see order's list" do
     customer = Customer.create!(email: 'cliente@email.com', password: 'password', name: 'cliente1', cpf: '479.111.310-15')
     customer2 = Customer.create!(email: 'cliente2@email.com', password: 'password2', name: 'cliente2', cpf: '880.275.650-30')
 
-    order1 = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: 1.day.from_now, estimated_qtd: 200,
+    order1 = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: 1.day.from_now, estimated_qtd: 30,
                         event_details: 'Esse evento deve possuir toda a temática com corações rosa', address: '', order_status: :waiting,
                         final_price: nil, extra_tax: nil, discount: nil, customer_id: customer.id, out_doors: false)
     order1.valid?
-    order2 = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: 1.day.from_now, estimated_qtd: 200,
+    order2 = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: 1.day.from_now, estimated_qtd: 35,
                         event_details: 'Quero temática Geek para a formatura em Ciência da Computação', address: '', order_status: :waiting,
                         final_price: nil, extra_tax: nil, discount: nil, customer_id: customer2.id, out_doors: false)
     order2.valid?
@@ -84,7 +84,7 @@ describe "Customer see order's list" do
     album = Album.create!(event_id: event.id)
     album.images.attach(io: File.open(Rails.root.join('spec', 'support', 'festa_casamento.jpg')), filename: 'festa_casamento.jpg')
     customer = Customer.create!(email: 'cliente@email.com', password: 'password', name: 'cliente', cpf: '479.111.310-15')
-    order = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: 1.day.from_now, estimated_qtd: 200,
+    order = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: 1.day.from_now, estimated_qtd: 30,
                           event_details: 'Esse evento deve possuir toda a temática com corações rosa', address: '', order_status: :waiting,
                           final_price: nil, extra_tax: nil, discount: nil, customer_id: customer.id, out_doors: false)
     
@@ -97,7 +97,7 @@ describe "Customer see order's list" do
     expect(page).to have_content 'Nome do Evento: Casamento'
     formatted_date = I18n.localize(1.day.from_now.to_date)
     expect(page).to have_content "Data do Evento: #{formatted_date}"
-    expect(page).to have_content 'Quantidade de pessoas: 200'
+    expect(page).to have_content 'Quantidade de pessoas: 30'
     expect(page).to have_content "Código: #{order.code}"
     expect(page).to have_content 'deve ser realizado no endereço: No próprio Buffet'
     expect(page).to have_content 'Status do pedido: Aguardando avaliação do buffet'
@@ -122,7 +122,7 @@ describe "Customer see order's list" do
     album = Album.create!(event_id: event.id)
     album.images.attach(io: File.open(Rails.root.join('spec', 'support', 'festa_casamento.jpg')), filename: 'festa_casamento.jpg')
     customer = Customer.create!(email: 'cliente@email.com', password: 'password', name: 'cliente', cpf: '479.111.310-15')
-    order = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: Date.new(2024, 5, 1), estimated_qtd: 60,
+    order = Order.create!(buffet_id: buffet.id, event_id: event.id, event_date: Date.new(2134, 5, 1), estimated_qtd: 30,
                           event_details: 'Esse evento deve possuir toda a temática com corações rosa', address: '', order_status: :waiting,
                           final_price: "16000", extra_tax: nil, discount: nil, customer_id: customer.id, out_doors: false)
 

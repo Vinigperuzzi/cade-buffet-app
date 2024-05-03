@@ -1,5 +1,5 @@
 <div class="evaluated-form-card">
-  <%= form_with(model: [@event, @order]) do |f| %>
+  <%= form_with(model: @order) do |f| %>
 
   <div class="field">
     <label>O valor do evento está calculado em <%= @value %> reais.</label>
@@ -9,7 +9,7 @@
   <div class="field">
       <%= f.label :payment_final_date %>
       <%= f.date_field :payment_final_date %>
-      <% if @order.errors[:payment_final_date].include?("não pode ficar em branco") %>
+      <% if @order.errors[:payment_final_date].include?("não pode ficar em branco") || @order.errors[:payment_final_date].include?(" deve ser futura") %>
         <div class="buffet-advise">
           <%= t(:payment_final_date) %> <%= @order.errors[:payment_final_date].join(', ').strip %>
         </div>

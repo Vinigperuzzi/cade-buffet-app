@@ -39,7 +39,7 @@ class AlbumsController < ApplicationController
 
   def update
     @event = Event.find(params[:event_id])
-    @album = Album.find_by(event_id: @event.id)
+    @album = @event.album
 
     return unless @event.buffet_id == current_user.buffet_id
     

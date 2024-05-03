@@ -50,11 +50,17 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    @order.update(get_update_params)
-    @order.payment_final_date = 3.days.from_now if @order.payment_final_date.nil?
-    @order.evaluated!
-    @order.save
-    redirect_to @order
+    if @order.update(get_update_params)
+      @order.payment_final_date = 3.days.from_now if @order.payment_final_date.nil?
+      @order.save
+      @order.evaluated!
+      redirect_to @order
+    else
+      @same_day_orders = Order.where(buffet_id: current_user.id, event_date: @order.event_date)
+      flash.now[:alert] = 'Não foi possível atualizar o pedido.'
+      render :show
+    end
+    
   end
 
   private
@@ -63,10 +69,7 @@ class OrdersController < ApplicationController
     day = @order.event_date
     price = Price.find_by(event_id: @order.event_id)
     return redirect_to user_index_orders_path, alert: "Você precisa cadastrar um preço para esse evento poder ser contratado." if price.nil?
-    aditional_people = 0
-    if @event.max_qtd < @order.estimated_qtd
-      aditional_people = @order.estimated_qtd - @event.max_qtd if @event.max_qtd < @order.estimated_qtd
-    end
+    aditional_people = @order.estimated_qtd - @event.min_qtd if @event.min_qtd <= @order.estimated_qtd
 
     if !Holidays.on(day, :br).empty? || day.saturday? || day.sunday?
       base = price.sp_base_price

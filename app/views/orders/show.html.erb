@@ -59,6 +59,6 @@
   </dl>
 </div>
 
-<% if user_signed_in? and @order.waiting? %>
+<% if user_signed_in? and (@order.waiting? || @order.evaluated?) %>
   <%= render "evaluate_form" %>
 <% end %>

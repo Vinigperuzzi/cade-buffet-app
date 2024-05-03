@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   resources :events, only: [:new, :create, :show, :edit, :update, :destroy] do
     resources :prices, only: [:new, :create, :edit, :update]
     resources :albums, only: [:new, :create, :edit, :update]
-    resources :orders, only: [:new, :create, :edit, :update]
+    resources :orders, only: [:new, :create]
   end
 
-  resources :orders, only: [:index, :show] do
+  resources :orders, only: [:index, :show, :update] do
     collection do
       get 'user_index'
     end

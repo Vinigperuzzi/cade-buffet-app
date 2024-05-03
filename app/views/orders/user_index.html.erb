@@ -8,7 +8,10 @@
       <div>
         <h2 class="event-card-title"><strong>Data do Evento: </strong><%= I18n.localize(order.event_date) %></h2>
         <div class="event-card-description"><strong>Código: </strong><%= order.code %></div>
-        <%= link_to 'Mostrar Detalhes', order_path(order.id), class: 'show-details-button' %>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div><%= link_to 'Mostrar Detalhes', order_path(order.id), class: 'show-details-button' %></div>
+          <div style="font-size: 30px;">⌛</div>
+        </div>
       </div>
     </div>
   <% end %>
@@ -22,7 +25,16 @@
       <div>
         <h2 class="event-card-title"><strong>Data do Evento: </strong><%= I18n.localize(order.event_date) %></h2>
         <div class="event-card-description"><strong>Código: </strong><%= order.code %></div>
-        <%= link_to 'Mostrar Detalhes', order_path(order.id), class: 'show-details-button' %>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div><%= link_to 'Mostrar Detalhes', order_path(order.id), class: 'show-details-button' %></div>
+          <% if order.evaluated? %>
+            <div style="font-size: 30px;">📋</div>
+          <% elsif order.confirmed? %>
+            <div style="font-size: 30px;">✅</div>
+          <% elsif order.canceled? %>
+            <div style="font-size: 30px;">🚫</div>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>

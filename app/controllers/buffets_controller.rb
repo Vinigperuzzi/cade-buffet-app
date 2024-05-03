@@ -3,7 +3,8 @@ class BuffetsController < ApplicationController
   before_action :set_buffet_for_current_user, only: [:my_buffet, :edit, :update]
 
   def my_buffet
-    @events = Event.where(buffet_id: current_user.buffet_id)
+    @buffet = Buffet.find(current_user.buffet_id)
+    @events = @buffet.events
   end
 
   def show
@@ -11,7 +12,7 @@ class BuffetsController < ApplicationController
     if current_user != nil and @buffet.id == current_user.buffet_id
       return redirect_to my_buffet_buffets_path
     end
-    @events = Event.where(buffet_id: params[:id])
+    @events = @buffet.events
   end
 
   def index
