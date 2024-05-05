@@ -1,0 +1,64 @@
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+  <h1>
+    <%= @event.name %> do buffet <%= @buffet.name %> pedido por <%= @customer.name %>
+  </h1>
+  <h2>
+    Código do pedido: <%= @order.code %>
+  </h2>
+</div>
+
+<section id="chat">
+  <div class="messages">
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+    <p>mensagem 1</p>
+    <p>mensagem 2</p>
+  </div>
+  <div class="form-messages">
+    <%= form_with(model: [@order, @message]) do |f| %>
+      <div class="field">
+        <%= f.text_field :message_text, placeholder: "Digite uma mensagem" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit 'Enviar mensagem' %>
+      </div>
+    <% end %>
+  </div>
+</section>

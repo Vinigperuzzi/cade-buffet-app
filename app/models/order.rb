@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   belongs_to :buffet
   belongs_to :event
   belongs_to :customer
+  has_many :messages
   enum order_status: { waiting: 0, confirmed: 1, canceled: 2, evaluated: 3 }
 
   validates :buffet_id, :event_id, :event_date, :estimated_qtd, :event_details,

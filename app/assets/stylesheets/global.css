@@ -394,3 +394,29 @@ img {
 .evaluated-form-card input[type="submit"]:hover {
   background-color: var(--lighter-color);
 }
+
+#chat {
+  width: 60%;
+  height: 60vh;
+  margin: 0 auto;
+}
+
+.messages {
+  height: calc(100% - 5rem);
+  overflow-y: auto;
+  background-color: var(--lighter-color);
+  color: var(--darker-color);
+  font-size: 20px;
+  border-radius: 30px;
+  padding: 30px;
+}
+
+.form-messages {
+  bottom: 0;
+  left: 0;
+  height: 10vh;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
