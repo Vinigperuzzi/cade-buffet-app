@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :orders, only: [:index, :show, :update] do
-    resources :messages, only: [:index, :create, :update]
+    resources :messages, only: [:index, :create, :edit, :update]
     collection do
       get 'user_index'
     end

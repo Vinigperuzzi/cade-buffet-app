@@ -1,10 +1,9 @@
 class AlbumsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_event, only: [:new, :create, :edit, :update]
 
   def new
     @album = Album.new
-    @event = Event.find(params[:event_id])
-
     message = 'Você não tem permissão paraadicionar fotos em outras contas.'
     return (
       redirect_to root_path, alert: message
@@ -13,8 +12,6 @@ class AlbumsController < ApplicationController
 
   def create
     @album = Album.new(get_params)
-    @event = Event.find(params[:event_id])
-
     return unless @event.buffet_id == current_user.buffet_id
 
     @album.event_id = @event.id
@@ -27,8 +24,6 @@ class AlbumsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:event_id])
-
     message = 'Você não tem permissão para editar preços para eventos de outras contas.'
     return (
       redirect_to root_path, alert: message
@@ -38,9 +33,7 @@ class AlbumsController < ApplicationController
   end
 
   def update
-    @event = Event.find(params[:event_id])
     @album = @event.album
-
     return unless @event.buffet_id == current_user.buffet_id
     
     if @album.update(get_params)
@@ -56,5 +49,9 @@ class AlbumsController < ApplicationController
 
   def get_params
     params.require(:album).permit(images:[])
+  end
+
+  def set_event
+    @event = Event.find(params[:event_id])
   end
 end

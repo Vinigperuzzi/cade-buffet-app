@@ -9,56 +9,46 @@
 
 <section id="chat">
   <div class="messages">
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-    <p>mensagem 1</p>
-    <p>mensagem 2</p>
-  </div>
-  <div class="form-messages">
-    <%= form_with(model: [@order, @message]) do |f| %>
-      <div class="field">
-        <%= f.text_field :message_text, placeholder: "Digite uma mensagem" %>
+    <% @messages.each do |message| %>
+
+      <% if (message.customer? and customer_signed_in?) or (message.user? and user_signed_in?)%>
+        <% div_class = "self_message_container" %>
+        <% my_message = true %>
+      <% else %>
+        <% div_class = "other_message_container" %>
+        <% my_message = false %>
+      <% end %>
+
+      <div class="<%= "#{div_class}" %> message_container">
+        <div class="message_text">
+          <%= message.message_text %>
+        </div>
+        <div class="message_sent_time">
+          Enviada em: <%= message.created_at.to_datetime.in_time_zone('Brasilia').strftime("%d/%m/%Y %H:%M:%S") %>
+          <% if my_message and customer_signed_in? and message.user_read %>
+            ✔️
+          <% elsif my_message and user_signed_in? and message.customer_read %>
+            ✔️
+          <% elsif my_message %>
+            🗳️
+          <% end %>
+        </div>
+        <% if my_message %>
+          <%= link_to '✎', edit_order_message_path(order_id: @order.id, id: message.id) %>
+        <% end %>
       </div>
 
-      <div class="actions">
-        <%= f.submit 'Enviar mensagem' %>
-      </div>
+      <% if !my_message %>
+        <% if customer_signed_in? %>
+          <% message.customer_read = true %>
+          <% message.save %>
+        <% elsif user_signed_in? %>
+          <% message.user_read = true %>
+          <% message.save %>
+        <% end %>
+      <% end %>
+
     <% end %>
   </div>
+  <%= render "form" %>
 </section>
