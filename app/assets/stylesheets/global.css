@@ -394,3 +394,73 @@ img {
 .evaluated-form-card input[type="submit"]:hover {
   background-color: var(--lighter-color);
 }
+
+#chat {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.messages {
+  height: calc(100% - 5rem);
+  overflow-y: auto;
+  background-color: var(--lighter-color);
+  color: var(--darker-color);
+  font-size: 20px;
+  border-radius: 30px;
+  padding: 30px;
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-messages {
+  bottom: 0;
+  left: 0;
+}
+
+#field_send_message_bar {
+  height: 5vh;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.send_message_bar {
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  background-color: var(--darker-color);
+  border-radius: 20px;
+  color: white;
+  padding-left: 15px;
+  padding-top: 10px;
+}
+
+.message_container {
+  border-radius: 20px;
+  margin: 5px;
+  padding: 10px;
+  display: inline-block;
+  word-wrap: break-word;
+  max-width: 60%;
+}
+
+.self_message_container {
+  background-color: var(--darker-color);
+  color: var(--light-color);
+  margin-right: 0;
+  align-self: flex-end;
+}
+
+.other_message_container {
+  background-color: var(--light-color);
+  color: var(--darker-color);
+  margin-left: 0;
+  align-self: flex-start;
+}
+
+.message_sent_time {
+  font-size: 15px;
+  color: var(--grey-color)
+}

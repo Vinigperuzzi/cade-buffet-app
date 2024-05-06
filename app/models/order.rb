@@ -2,12 +2,14 @@ class Order < ApplicationRecord
   belongs_to :buffet
   belongs_to :event
   belongs_to :customer
+  has_many :messages
   enum order_status: { waiting: 0, confirmed: 1, canceled: 2, evaluated: 3 }
 
   validates :buffet_id, :event_id, :event_date, :estimated_qtd, :event_details,
             :code, :order_status, presence: :true
 
-  validate :event_date_is_future?, :payment_final_date_is_future?, :qtd_people_within_max_qtd?
+  validate :event_date_is_future?, :payment_final_date_is_future?,
+            :qtd_people_within_max_qtd?
 
   before_validation :generate_code, on: :create
 
@@ -33,7 +35,8 @@ class Order < ApplicationRecord
     if self.event_id.present?
       @event = Event.find(self.event_id)
       if self.estimated_qtd.present? and self.estimated_qtd > @event.max_qtd
-        self.errors.add(:estimated_qtd, " não pode ser maior do que a quantidade máxima do evento")
+        message = " não pode ser maior do que a quantidade máxima do evento"
+        self.errors.add(:estimated_qtd, message)
       end
     end
   end

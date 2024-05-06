@@ -1,3 +1,11 @@
+<div style="display: flex; justify-content: center; margin-bottom: 10px;">
+  <% if user_signed_in?%>
+    <%= link_to 'Conversar com o cliente sobre esse pedido', order_messages_path(@order), class: "home-login-button owner" %>
+  <% elsif customer_signed_in?%>
+    <%= link_to 'Conversar com o buffet sobre esse pedido', order_messages_path(@order), class: "home-login-button owner" %>
+  <% end %>
+</div>
+
 <div class="buffet-card">
   <div class="h1-info">
     <h1>Exibindo o Pedido <%= @order.code %></h1>

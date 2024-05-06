@@ -1,0 +1,11 @@
+<div class="form-messages">
+  <%= form_with(model: [@order, @message]) do |f| %>
+    <div class="field" id="field_send_message_bar">
+      <%= f.text_area :message_text, placeholder: "Digite uma mensagem...", class: "send_message_bar", id: 'message_text' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Enviar mensagem' %>
+    </div>
+  <% end %>
+</div>
