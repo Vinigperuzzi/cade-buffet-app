@@ -54,8 +54,25 @@ The documentation for endpoints are listed below:
 
 ```http://localhost:3000/api/v1/buffets```  -> list all buffets registered in application
 
+Response example: 
+```[{"name": "example buffet", "id": 1}, {"name": "another buffet", "id": 2}]```
 
-```http://localhost:3000/api/v1/buffets?query=name```  -> changing name for any fragment word you desire, the api will return any buffet that has on it's name some correspondence to the given fragment
+
+```http://localhost:3000/api/v1/buffets?query=example```  -> changing example for any fragment word you desire, the api will return any buffet that has on it's name some correspondence to the given fragment
+
+Response example: 
+```{"name": "example buffet", "id": 1}```
+
+```http://localhost:3000/api/v1/buffets?buffet_id=x```  -> informing an id where the 'x' are, the api will response with name, description and id for the specified buffet
+
+Response example: 
+```[{"name": "event name", "description":  "This is an example event ", "id": 1}, {"name": "another event name", "description":  "This is another example event ", "id": 2}]```
+
+Informing an invalid buffet_id, or not informing id at all will send an error message and the error status, such as:
+
+```{"error":"Buffet_id required for this operation"}```
+```{"error":"Buffet not found for this buffet_id"}```
+
 
 ***
 
