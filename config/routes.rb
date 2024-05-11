@@ -29,7 +29,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :buffets, only: [:index, :show]
-      resources :events, only: [:index]
+      resources :events, only: [:index] do
+        member do
+          get 'check_date'
+        end
+      end
     end
   end
 end

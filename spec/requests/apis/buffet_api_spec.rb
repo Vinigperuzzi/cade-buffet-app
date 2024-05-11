@@ -66,7 +66,7 @@ describe "Buffet API" do
     end
   end
 
-  context 'GET /api/v1/buffets?buffet_id:id' do
+  context 'GET /api/v1/buffets/id' do
     it 'return all desirable details for buffets_id' do
       user = User.create!(email: 'vinicius@email.com', password: 'password')
       buffet = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
@@ -98,7 +98,7 @@ describe "Buffet API" do
       expect(json_response["description"]).to eq "O melhor serviço de buffet do centro de Pelotas"
     end
 
-    it 'and do not send buffet_id and fails' do
+    it 'and send invalid buffet_id and fails' do
       get "/api/v1/buffets/250"
 
       expect(response.status).to eq 406

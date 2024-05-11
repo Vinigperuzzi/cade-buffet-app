@@ -105,5 +105,54 @@ Informing an invalid buffet_id, or not informing id at all will send an error me
 
 ***
 
+```'http://localhost:3000/api/v1/events/250/check_date?date=2034-12-7&guest_qtd=30'``` -> Response with the value and availability for the given date.
+
+Response examples: 
+
+Date available
+```
+{
+  "value": 2500,
+  "availability": true
+}
+```
+Date not available
+
+```
+{
+  "value": 0,
+  "availability": false
+}
+```
+
+if error occur
+
+```
+{
+  "error": "Event not found for this id"
+}
+```
+
+```
+{
+  "error": "Guest quantity required for this operation
+}
+```
+
+```
+{
+  "error": "Date required for this operation"
+}
+```
+
+```
+{
+  "error": "Guest quantity above max event's capacity"
+}
+```
+
+
+***
+
 ### Happy Coding
 ## Vinigperuzzi 🧙‍♂️
