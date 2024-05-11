@@ -19,9 +19,9 @@ class Api::V1::EventsController < ActionController::API
     rescue ActiveRecord::QueryAborted => e
       render status: 412, json: {error: "Buffet_id required for this operation"}
 
-    rescue ActiveRecord::RecordNotFound => each
+    rescue ActiveRecord::RecordNotFound => e
       render status: 406, json: {error: "Buffet not found for this buffet_id"}
-      
+
     end
     
   end

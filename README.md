@@ -52,16 +52,45 @@ You can simply run ```rspec```, so all tests may be running. But, sometimes, in 
 This project is also an API, you can send requests to it's endpoints and receive data as json.
 The documentation for endpoints are listed below:
 
+***
+
 ```http://localhost:3000/api/v1/buffets```  -> list all buffets registered in application
 
 Response example: 
 ```[{"name": "example buffet", "id": 1}, {"name": "another buffet", "id": 2}]```
 
+***
+
+```http://localhost:3000/api/v1/buffets/id```  -> changing id for the specified number, the api will response details for specified buffet
+
+Response example: 
+```
+{
+  "name": "My Buffet",
+  "phone": "xx - xxxxxxxxx",
+  "email": "example@email.com",
+  "address": "Some Street, some number",
+  "district": "My district",
+  "state": "XX",
+  "city": "Some City",
+  "payment_method": "List of payment methods",
+  "description": "Description of my buffet"
+}
+```
+
+
+Informing an invalid buffet_id will send an error message and the error status, such as:
+
+```{"error":"Buffet not found for this buffet_id"}```
+
+***
 
 ```http://localhost:3000/api/v1/buffets?query=example```  -> changing example for any fragment word you desire, the api will return any buffet that has on it's name some correspondence to the given fragment
 
 Response example: 
 ```{"name": "example buffet", "id": 1}```
+
+***
 
 ```http://localhost:3000/api/v1/buffets?buffet_id=x```  -> informing an id where the 'x' are, the api will response with name, description and id for the specified buffet
 

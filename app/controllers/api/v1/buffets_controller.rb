@@ -9,4 +9,19 @@ class Api::V1::BuffetsController < ActionController::API
     end
     render status: 200, json: buffets
   end
+
+  def show
+    begin
+      b = Buffet.find(params[:id])
+      raise ActiveRecord::RecordNotFound if b.nil?
+      
+      buffet = {name: b.name, phone: b.phone, email: b.email, address: b.address,
+                district: b.district, state: b.state, city: b.city,
+                payment_method: b.payment_method, description: b.description}
+      render status: 200, json: buffet
+
+    rescue ActiveRecord::RecordNotFound => e
+      render status: 406, json: {error: "Buffet not found for this buffet_id"}
+    end
+  end
 end
