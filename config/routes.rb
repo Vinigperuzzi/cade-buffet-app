@@ -25,4 +25,10 @@ Rails.application.routes.draw do
       get 'cancel'
     end
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :buffets, only: [:index]
+    end
+  end
 end

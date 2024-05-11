@@ -47,5 +47,17 @@ You can simply run ```rspec```, so all tests may be running. But, sometimes, in 
 
 ***
 
+### API
+
+This project is also an API, you can send requests to it's endpoints and receive data as json.
+The documentation for endpoints are listed below:
+
+```http://localhost:3000/api/v1/buffets```  -> list all buffets registered in application
+
+
+```http://localhost:3000/api/v1/buffets?query=name```  -> changing name for any fragment word you desire, the api will return any buffet that has on it's name some correspondence to the given fragment
+
+***
+
 ### Happy Coding
 ## Vinigperuzzi 🧙‍♂️
