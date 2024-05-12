@@ -10,9 +10,13 @@ describe "Buffet API" do
                             payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
       user.update!(buffet_id: buffet.id)
       event = Event.create!(name: 'Casamento', description: 'Serviço de mesa completo para casamentos', min_qtd: 20, max_qtd: 40,
-                              duration: 250, menu: 'Frutos do Mar', buffet_id: buffet.id)
+                              duration: 250, menu: 'Frutos do Mar', buffet_id: buffet.id, drinks: false, decoration: true, valet: false, only_local: false)
       event2 = Event.create!(name: 'Formatura', description: 'Formatura de alto padrão', min_qtd: 200, max_qtd: 400,
-                                duration: 250, menu: 'Doces, tortas, bolos e canapés', buffet_id: buffet.id)
+                                duration: 250, menu: 'Doces, tortas, bolos e canapés', buffet_id: buffet.id, drinks: false, decoration: false, valet: false, only_local: false)
+      price = Price.create!(base_price: 5000, sp_base_price:6000, sp_additional_person:500,
+                              additional_person:200, sp_extra_hour:30, extra_hour:20, event_id: event.id)
+      price2 = Price.create!(base_price: 5000, sp_base_price:6000, sp_additional_person:500,
+                              additional_person:200, sp_extra_hour:30, extra_hour:20, event_id: event2.id)
 
       get "/api/v1/events?buffet_id=1"
 
@@ -21,9 +25,23 @@ describe "Buffet API" do
       json_response = JSON.parse(response.body)
       expect(json_response.class).to eq Array
       expect(json_response.length).to eq 2
-      expect(json_response[0]["name"]).to eq "Casamento"
       expect(json_response[0]["id"]).to eq 1
+      expect(json_response[0]["name"]).to eq "Casamento"
       expect(json_response[0]["description"]).to eq "Serviço de mesa completo para casamentos"
+      expect(json_response[0]["min_qtd"]).to eq 20
+      expect(json_response[0]["max_qtd"]).to eq 40
+      expect(json_response[0]["duration"]).to eq 250
+      expect(json_response[0]["menu"]).to eq "Frutos do Mar"
+      expect(json_response[0]["drinks"]).to eq false
+      expect(json_response[0]["decoration"]).to eq true
+      expect(json_response[0]["valet"]).to eq false
+      expect(json_response[0]["only_local"]).to eq false
+      expect(json_response[0]["prices"]["base_price"]).to eq 5000
+      expect(json_response[0]["prices"]["additional_person"]).to eq 200
+      expect(json_response[0]["prices"]["extra_hour"]).to eq 20
+      expect(json_response[0]["prices"]["sp_base_price"]).to eq 6000
+      expect(json_response[0]["prices"]["sp_additional_person"]).to eq 500
+      expect(json_response[0]["prices"]["sp_extra_hour"]).to eq 30
       expect(json_response[1]["name"]).to eq "Formatura"
       expect(json_response[1]["id"]).to eq 2
       expect(json_response[1]["description"]).to eq "Formatura de alto padrão"

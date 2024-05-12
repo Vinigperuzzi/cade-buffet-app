@@ -11,7 +11,16 @@ class Api::V1::EventsController < ActionController::API
       model_events = buffet.events
       events = []
       model_events.each do |e|
-        events << {name: e.name, description: e.description, id: e.id}
+        price = Price.find_by(event_id: e.id)
+        events << {
+                    id: e.id, name: e.name, description: e.description, min_qtd: e.min_qtd,
+                    max_qtd: e.max_qtd, duration: e.duration, menu: e.menu, drinks: e.drinks,
+                    decoration: e.decoration, valet: e.valet, only_local: e.only_local, 
+                    prices: {base_price: price.base_price, additional_person: price.additional_person,
+                    extra_hour: price.extra_hour, sp_base_price: price.sp_base_price,
+                    sp_additional_person: price.sp_additional_person,
+                    sp_extra_hour: price.sp_extra_hour}
+                  }
       end
 
       render status: 200, json: events

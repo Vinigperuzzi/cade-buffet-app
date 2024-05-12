@@ -92,10 +92,55 @@ Response example:
 
 ***
 
-```http://localhost:3000/api/v1/buffets?buffet_id=x```  -> informing an id where the 'x' are, the api will response with name, description and id for the specified buffet
+```http://localhost:3000/api/v1/events?buffet_id=x```  -> informing an buffet id where the 'x' are, the api will response with name, description and id for and other details for all events for the specified buffet
 
 Response example: 
-```[{"name": "event name", "description":  "This is an example event ", "id": 1}, {"name": "another event name", "description":  "This is another example event ", "id": 2}]```
+```
+[
+  {
+    "id": 1,
+    "name": "Casamento",
+    "description": "Buffet de doces e bolo artesanal para casamentos",
+    "min_qtd": 50,
+    "max_qtd": 500,
+    "duration": 250,
+    "menu": "Salgadinhos, doces e bolos",
+    "drinks": true,
+    "decoration": true,
+    "valet": true,
+    "only_local": false,
+    "prices": {
+      "base_price": 2500,
+      "additional_person": 250,
+      "extra_hour": 150,
+      "sp_base_price": 3500,
+      "sp_additional_person": 350,
+      "sp_extra_hour": 250
+    }
+  },
+  {
+    "id": 3,
+    "name": "Formatura",
+    "description": "Salgadinhos de festa para formaturas",
+    "min_qtd": 60,
+    "max_qtd": 200,
+    "duration": 450,
+    "menu": "Salgadinhos variados",
+    "drinks": true,
+    "decoration": true,
+    "valet": true,
+    "only_local": false,
+    "prices": {
+      "base_price": 5000,
+      "additional_person": 50,
+      "extra_hour": 40,
+      "sp_base_price": 6000,
+      "sp_additional_person": 60,
+      "sp_extra_hour": 50
+    }
+  }
+]
+```
 
 Informing an invalid buffet_id, or not informing id at all will send an error message and the error status, such as:
 
@@ -105,7 +150,7 @@ Informing an invalid buffet_id, or not informing id at all will send an error me
 
 ***
 
-```'http://localhost:3000/api/v1/events/250/check_date?date=2034-12-7&guest_qtd=30'``` -> Response with the value and availability for the given date.
+```'http://localhost:3000/api/v1/events/id/check_date?date=2034-12-7&guest_qtd=30'``` -> Response with the value and availability for the given date, with the given guest quantity for the event specified in id
 
 Response examples: 
 
