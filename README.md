@@ -9,9 +9,18 @@ This project is part of the training schedule at Campus Code in the TreinaDev pr
 ### Functionalities
 
 A user can register as a client or buffet owner.
+
 A buffet owner can register their company by listing offered services, menus with their prices, and receive inquiries from interested individuals.
 
-Functionalities in progress...
+A Customer can see all events for buffets, an can order an event with some details.
+
+A buffet owner can evaluate the order's details and confirm the order.
+
+After owner's confirmation the customer can confirm or cancel the order.
+
+There's a chat that customers and owners can change messages about an event.
+
+There's an API to be consumed in a front-end.
 
 ***
 
@@ -195,6 +204,19 @@ if error occur
   "error": "Guest quantity above max event's capacity"
 }
 ```
+
+```
+{
+  "error": "Date must be future"
+}
+```
+
+For Campus Code people:
+
+I consider that any other event already evaluated by owner and them confirmed by customer will cause conflict in the API returning code 200, cause it's something expect and successfully returned, but with availability false and value equal to zero.
+
+In the application it's a little diferente, any event waiting for evaluation will cause conflict and show the message that has other events for the specified date. This choice was made so the owner can be aware that are others events asked for that day and can choose between then.
+I, personally, defined to be this way, cause the front end may be focused on customer experience, so they are only interested in certify that the date are or not available. The owner experience may need to let it aware of all possibilities.
 
 
 ***
