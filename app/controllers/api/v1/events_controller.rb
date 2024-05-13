@@ -41,6 +41,7 @@ class Api::V1::EventsController < ActionController::API
     @event = Event.find_by(id: params[:id])
     return render status: 406, json: {error: "Event not found for this id"} if @event.nil?
     @date = params[:date].to_date
+    return render status: 412, json: {error: "Date must be future"} if @date < Date.today
     @guest_qtd = params[:guest_qtd].to_i
     return render status: 412, json: {error: "Guest quantity above max event's capacity"} if @guest_qtd > @event.max_qtd
     same_day_orders = Order.where(
