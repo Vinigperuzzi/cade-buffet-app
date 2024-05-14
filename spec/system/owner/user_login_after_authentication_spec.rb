@@ -25,9 +25,11 @@ describe 'User connect to aplication after authenticate itself' do
   it 'already registered a buffet' do
     user = User.create!(email: 'vinicius@email.com', password: 'password')
     buffet = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
-                          register_number: '12456456000145', phone: '53 991814646', email: 'vinigperuzzi@gourmet.com',
-                          address: 'Estrada do Laranjal, 695', district: 'Laranjal', state: 'RS', city: 'Pelotas',
-                          payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
+      register_number: '12456456000145', phone: '53 991814646',
+      email: 'vinigperuzzi@gourmet.com', address: 'Estrada do Laranjal, 695',
+      district: 'Laranjal', state: 'RS', city: 'Pelotas',
+      payment_method: 'Pix, Débito, Crédito, Dinheiro',
+      description: 'O melhor serviço de buffet do centro de Pelotas')
     user.update!(buffet_id: buffet.id)
 
     visit root_path

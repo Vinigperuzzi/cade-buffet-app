@@ -13,14 +13,15 @@ class Api::V1::EventsController < ActionController::API
       model_events.each do |e|
         price = Price.find_by(event_id: e.id)
         events << {
-                    id: e.id, name: e.name, description: e.description, min_qtd: e.min_qtd,
-                    max_qtd: e.max_qtd, duration: e.duration, menu: e.menu, drinks: e.drinks,
-                    decoration: e.decoration, valet: e.valet, only_local: e.only_local, 
-                    prices: {base_price: price.base_price, additional_person: price.additional_person,
-                    extra_hour: price.extra_hour, sp_base_price: price.sp_base_price,
-                    sp_additional_person: price.sp_additional_person,
-                    sp_extra_hour: price.sp_extra_hour}
-                  }
+          id: e.id, name: e.name, description: e.description, min_qtd: e.min_qtd,
+          max_qtd: e.max_qtd, duration: e.duration, menu: e.menu, drinks: e.drinks,
+          decoration: e.decoration, valet: e.valet, only_local: e.only_local, 
+          prices: {base_price: price.base_price,
+          additional_person: price.additional_person,
+          extra_hour: price.extra_hour, sp_base_price: price.sp_base_price,
+          sp_additional_person: price.sp_additional_person,
+          sp_extra_hour: price.sp_extra_hour}
+        }
       end
 
       render status: 200, json: events
@@ -35,15 +36,27 @@ class Api::V1::EventsController < ActionController::API
   end
 
   def check_date
-    return render status: 412, json: {error: "Date required for this operation"} if params[:date].nil?
-    return render status: 412, json: {error: "Guest quantity required for this operation"} if params[:guest_qtd].nil?
+    return render status: 412, json: {
+      error: "Date required for this operation"
+      } if params[:date].nil?
+
+    return render status: 412, json: {
+      error: "Guest quantity required for this operation"
+      } if params[:guest_qtd].nil?
     
     @event = Event.find_by(id: params[:id])
-    return render status: 406, json: {error: "Event not found for this id"} if @event.nil?
+    return render status: 406, json: {
+      error: "Event not found for this id"
+      } if @event.nil?
+
     @date = params[:date].to_date
-    return render status: 412, json: {error: "Date must be future"} if @date < Date.today
+    return render status: 412, json: {
+      error: "Date must be future"
+      } if @date < Date.today
     @guest_qtd = params[:guest_qtd].to_i
-    return render status: 412, json: {error: "Guest quantity above max event's capacity"} if @guest_qtd > @event.max_qtd
+    return render status: 412, json: {
+      error: "Guest quantity above max event's capacity"
+      } if @guest_qtd > @event.max_qtd
     same_day_orders = Order.where(
                       buffet_id: @event.buffet_id, event_date: @date
                       ).where(order_status: :confirmed)

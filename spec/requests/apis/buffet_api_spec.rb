@@ -5,16 +5,19 @@ describe "Buffet API" do
     it 'return all buffets ordered by name' do
       user = User.create!(email: 'vinicius@email.com', password: 'password')
       buffet = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
-                          register_number: '12456456000145', phone: '53 991814646', email: 'vinigperuzzi@gourmet.com',
-                          address: 'Estrada do Laranjal, 695', district: 'Laranjal', state: 'RS', city: 'Pelotas',
-                          payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
+        register_number: '12456456000145', phone: '53 991814646',
+        email: 'vinigperuzzi@gourmet.com',
+        address: 'Estrada do Laranjal, 695', district: 'Laranjal',
+        state: 'RS', city: 'Pelotas',
+        payment_method: 'Pix, Débito, Crédito, Dinheiro',
+        description: 'O melhor serviço de buffet do centro de Pelotas')
       user.update!(buffet_id: buffet.id)
 
       user2 = User.create!(email: 'debora@email.com', password: 'password2')
       buffet2 = Buffet.create!(name: 'Dedi Delícias', corporate_name: 'Amaral eventos LTDA', 
-                          register_number: '32156456000145', phone: '53 991535353', email: 'dedi@delicias.com',
-                          address: 'Marechal Deodoro, 200', district: 'Centro', state: 'RS', city: 'Piratini',
-                          payment_method: 'Pix, Dinheiro', description: 'O evento mais elegante da região')
+        register_number: '32156456000145', phone: '53 991535353', email: 'dedi@delicias.com',
+        address: 'Marechal Deodoro, 200', district: 'Centro', state: 'RS', city: 'Piratini',
+        payment_method: 'Pix, Dinheiro', description: 'O evento mais elegante da região')
       user2.update!(buffet_id: buffet2.id)
 
       get "/api/v1/buffets"
@@ -33,16 +36,18 @@ describe "Buffet API" do
     it 'and return buffets by matching search word' do
       user = User.create!(email: 'vinicius@email.com', password: 'password')
       buffet = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
-                          register_number: '12456456000145', phone: '53 991814646', email: 'vinigperuzzi@gourmet.com',
-                          address: 'Estrada do Laranjal, 695', district: 'Laranjal', state: 'RS', city: 'Pelotas',
-                          payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
+        register_number: '12456456000145', phone: '53 991814646',
+        email: 'vinigperuzzi@gourmet.com', address: 'Estrada do Laranjal, 695',
+        district: 'Laranjal', state: 'RS', city: 'Pelotas',
+        payment_method: 'Pix, Débito, Crédito, Dinheiro',
+        description: 'O melhor serviço de buffet do centro de Pelotas')
       user.update!(buffet_id: buffet.id)
 
       user2 = User.create!(email: 'debora@email.com', password: 'password2')
       buffet2 = Buffet.create!(name: 'Dedi Delícias', corporate_name: 'Amaral eventos LTDA', 
-                          register_number: '32156456000145', phone: '53 991535353', email: 'dedi@delicias.com',
-                          address: 'Marechal Deodoro, 200', district: 'Centro', state: 'RS', city: 'Piratini',
-                          payment_method: 'Pix, Dinheiro', description: 'O evento mais elegante da região')
+        register_number: '32156456000145', phone: '53 991535353', email: 'dedi@delicias.com',
+        address: 'Marechal Deodoro, 200', district: 'Centro', state: 'RS', city: 'Piratini',
+        payment_method: 'Pix, Dinheiro', description: 'O evento mais elegante da região')
       user2.update!(buffet_id: buffet2.id)
 
       get "/api/v1/buffets?query=Vini"
@@ -70,16 +75,16 @@ describe "Buffet API" do
     it 'return all desirable details for buffets_id' do
       user = User.create!(email: 'vinicius@email.com', password: 'password')
       buffet = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
-                            register_number: '12456456000145', phone: '53 991814646', email: 'vinigperuzzi@gourmet.com',
-                            address: 'Estrada do Laranjal, 695', district: 'Laranjal', state: 'RS', city: 'Pelotas',
-                            payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
+        register_number: '12456456000145', phone: '53 991814646', email: 'vinigperuzzi@gourmet.com',
+        address: 'Estrada do Laranjal, 695', district: 'Laranjal', state: 'RS', city: 'Pelotas',
+        payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
       user.update!(buffet_id: buffet.id)
 
       user2 = User.create!(email: 'debora@email.com', password: 'password2')
       buffet2 = Buffet.create!(name: 'Dedi Delícias', corporate_name: 'Amaral eventos LTDA', 
-                          register_number: '32156456000145', phone: '53 991535353', email: 'dedi@delicias.com',
-                          address: 'Marechal Deodoro, 200', district: 'Centro', state: 'RS', city: 'Piratini',
-                          payment_method: 'Pix, Dinheiro', description: 'O evento mais elegante da região')
+        register_number: '32156456000145', phone: '53 991535353', email: 'dedi@delicias.com',
+        address: 'Marechal Deodoro, 200', district: 'Centro', state: 'RS', city: 'Piratini',
+        payment_method: 'Pix, Dinheiro', description: 'O evento mais elegante da região')
       user2.update!(buffet_id: buffet2.id)
 
       get "/api/v1/buffets/1"
