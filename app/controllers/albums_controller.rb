@@ -4,7 +4,7 @@ class AlbumsController < ApplicationController
 
   def new
     @album = Album.new
-    message = 'Você não tem permissão paraadicionar fotos em outras contas.'
+    message = 'Você não tem permissão para adicionar fotos em outras contas.'
     return (
       redirect_to root_path, alert: message
       ) unless @event.buffet_id == current_user.buffet_id

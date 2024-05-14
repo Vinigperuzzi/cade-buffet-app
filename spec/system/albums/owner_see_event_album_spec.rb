@@ -82,7 +82,7 @@ describe "owner see an album from a event" do
     visit new_event_album_path(event_id: event2.id)
 
     expect(current_path).to eq root_path
-    expect(page).to have_content 'Você não tem permissão paraadicionar fotos em outras contas.'
+    expect(page).to have_content 'Você não tem permissão para adicionar fotos em outras contas.'
   end
 
   it "and cannot add images even forcing via route from other's events" do

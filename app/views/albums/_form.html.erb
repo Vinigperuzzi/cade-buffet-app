@@ -1,4 +1,7 @@
 <%= form_with(model: [@event, @album]) do |f| %>
+  <% @album.images.each do |image| %>
+    <%= f.hidden_field :images, multiple: true, value: image.signed_id %>
+  <% end %>
   <div class="field">
     <%= f.label :images %>
     <%= f.file_field :images, multiple: true %>
