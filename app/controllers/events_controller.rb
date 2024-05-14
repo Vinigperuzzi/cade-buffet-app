@@ -37,7 +37,7 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    return unless @event.buffet_id == current_user.buffet_id
+    return redirect_to root_path unless @event.buffet_id == current_user.buffet_id
     if @event.update(get_params)
       message = 'Evento atualizado com sucesso.'
       redirect_to my_buffet_buffets_path, notice: message
