@@ -1,4 +1,2 @@
-prices
-albums
-orders
 messages
+albums

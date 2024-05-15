@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_customer!, only: [:new, :create, :index]
   before_action :authenticate_user!, only: [:user_index, :update]
   before_action :authenticate_customer_or_user!, only: [:show, :confirm, :cancel]
+  before_action :verify_order_ownership, only: [:confirm, :cancel]
 
   def index
     @orders = Order.where(customer_id: current_customer.id)
@@ -83,13 +84,11 @@ class OrdersController < ApplicationController
   end
 
   def confirm
-    @order = Order.find(params[:id])
     @order.confirmed!
     redirect_to @order
   end
 
   def cancel
-    @order = Order.find(params[:id])
     @order.canceled!
     redirect_to @order
   end
@@ -130,6 +129,18 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:payment_final_date, :extra_tax, :discount,
                                   :tax_description, :discount_description,
                                   :payment_form)
+  end
+
+  def verify_order_ownership
+    @order = Order.find(params[:id])
+    return redirect_to new_customer_session_path if (
+      customer_signed_in? &&
+      @order.customer_id != current_customer.id
+      )
+    return redirect_to new_user_session_path if (
+      user_signed_in? &&
+      @order.buffet_id != current_user.buffet_id
+      )
   end
 
   def authenticate_customer_or_user!
