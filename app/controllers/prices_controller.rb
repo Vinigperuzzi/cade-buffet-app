@@ -43,7 +43,7 @@ class PricesController < ApplicationController
     @price = Price.find(params[:id])
     @event = Event.find(params[:event_id])
 
-    return unless @event.buffet_id == current_user.buffet_id
+    return redirect_to root_path unless @event.buffet_id == current_user.buffet_id
 
     if @price.update(get_params)
       redirect_to @event, notice: 'Preço atualizado com sucesso.'
