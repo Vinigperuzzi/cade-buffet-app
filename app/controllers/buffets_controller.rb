@@ -1,6 +1,8 @@
 class BuffetsController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :index, :search]
+  before_action :authenticate_user!, except: [:show, :index, :search, :rate, :create_rate]
   before_action :set_buffet_for_current_user, only: [:my_buffet, :edit, :update, :active, :inactive]
+  before_action :authenticate_customer!, only: [:rate, :create_rate]
+  before_action :check_rate_condition, only: [:rate, :create_rate]
 
   def my_buffet
     @buffet = Buffet.find(current_user.buffet_id)
@@ -86,6 +88,14 @@ class BuffetsController < ApplicationController
     redirect_to @buffet
   end
 
+  def rate
+    
+  end
+
+  def create_rate
+
+  end
+
   private
 
   def get_params
@@ -101,5 +111,17 @@ class BuffetsController < ApplicationController
       return redirect_to new_buffet_path, alert: message
     end
     @buffet = Buffet.find(current_user.buffet_id)
+  end
+
+  def check_rate_condition
+    @order = Order.find_by(id: params[:order_id])
+    message = "Você não pode avaliar esse Buffet."
+    unless @order and @order.event_date < Date.today and @order.confirmed?
+      return redirect_to root_path, alert: message
+    end
+    unless @order.customer_id == current_customer.id
+      return redirect_to root_path, alert: message
+    end
+    @buffet = Buffet.find(params[:id])
   end
 end

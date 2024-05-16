@@ -4,6 +4,12 @@
   <% elsif customer_signed_in?%>
     <%= link_to 'Conversar com o buffet sobre esse pedido', order_messages_path(@order), class: "home-login-button owner" %>
   <% end %>
+
+  <% if customer_signed_in? and @order.confirmed? and @order.event_date < Date.today %>
+    <div>
+      <%= link_to 'Avaliar Buffet', rate_buffet_path(@order.buffet_id, order_id: @order.id), class: "home-login-button owner" %>
+    </div>
+  <% end %>
 </div>
 
 <div class="buffet-card">

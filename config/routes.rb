@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     member do
       get 'active'
       get 'inactive'
+      get 'rate'
+      post 'rate', to: 'buffets#create_rate'
     end
   end
   resources :events, only: [:new, :create, :show, :edit, :update, :destroy] do
