@@ -1,6 +1,6 @@
 class BuffetsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index, :search, :rate, :create_rate]
-  before_action :set_buffet_for_current_user, only: [:my_buffet, :edit, :update, :active, :inactive]
+  before_action :set_buffet_for_current_user, only: [:my_buffet, :edit, :update, :active, :inactive, :add_cover, :create_add_cover]
   before_action :authenticate_customer!, only: [:rate, :create_rate]
   before_action :check_rate_condition, only: [:rate, :create_rate]
 
@@ -94,6 +94,16 @@ class BuffetsController < ApplicationController
 
   def create_rate
 
+  end
+
+  def add_cover
+
+  end
+
+  def create_add_cover
+    p = params.require(:buffet).permit(:image)
+    @buffet.update(p)
+    redirect_to @buffet
   end
 
   private
