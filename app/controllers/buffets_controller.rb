@@ -1,6 +1,6 @@
 class BuffetsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index, :search]
-  before_action :set_buffet_for_current_user, only: [:my_buffet, :edit, :update]
+  before_action :set_buffet_for_current_user, only: [:my_buffet, :edit, :update, :active, :inactive]
 
   def my_buffet
     @buffet = Buffet.find(current_user.buffet_id)
@@ -12,11 +12,11 @@ class BuffetsController < ApplicationController
     if current_user != nil and @buffet.id == current_user.buffet_id
       return redirect_to my_buffet_buffets_path
     end
-    @events = @buffet.events
+    @events = @buffet.events.where(active: true)
   end
 
   def index
-    @buffets = Buffet.all
+    @buffets = Buffet.all.where(active: true)
   end
 
   def new
@@ -60,15 +60,30 @@ class BuffetsController < ApplicationController
     buffets_by_name_or_city = Buffet.where(
                                 "name LIKE :term OR city LIKE :term",
                                 term: "%#{@term}%"
-                                ).order(:name)
+                                ).order(:name).where(active: true)
 
     events_by_name = Event.where("events.name LIKE ?", "%#{@term}%")
+                            .where(active: true)
+
     buffets_by_event_name = Buffet.joins(:events)
                             .where(events: { name: events_by_name
-                            .pluck(:name) }).order(:name).distinct.order(:name)
+                            .pluck(:name) }).where(active: true).order(:name)
+                            .distinct.order(:name)
 
     @buffets = (buffets_by_event_name | buffets_by_name_or_city)
     @buffets = (@buffets.sort_by { |buffet| buffet.name.downcase })
+  end
+
+  def active
+    @buffet.active = true
+    @buffet.save
+    redirect_to @buffet
+  end
+
+  def inactive
+    @buffet.active = false
+    @buffet.save
+    redirect_to @buffet
   end
 
   private

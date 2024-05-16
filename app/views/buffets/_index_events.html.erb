@@ -4,7 +4,12 @@
   <% @events.each do |event| %>
     <div class="event-card">
       <div>
-        <h2 class="event-card-title"><%= event.name %></h2>
+        <h2 class="event-card-title">
+          <%= event.name %>
+          <% unless event.active %>
+            ⛔ <p class="event-card-description">(Desativado)</p>
+          <% end %>
+        </h2>
         <div class="event-card-description"><%= event.description %></div>
         <div class="event-card-item"><strong>Capacidade Máxima:</strong> <%= event.max_qtd %></div>
         <% price = Price.find_by(event_id: event.id) %>

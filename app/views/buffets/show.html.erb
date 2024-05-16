@@ -1,3 +1,7 @@
-<%= render 'buffet_info' %>
+<% if @buffet.active %>
+  <%= render 'buffet_info' %>
+  <%= render 'index_events' %>
 
-<%= render 'index_events' %>
+<% else %>
+  <%= render 'inactive_message' %>
+<% end %>

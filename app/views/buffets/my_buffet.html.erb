@@ -1,8 +1,16 @@
-<%= render 'buffet_info' %>
+<% if @buffet.active %>
+  <%= render 'buffet_info' %>
 
-<div class="login-options" id="bottom-button">
-  <%= link_to 'Editar Buffet', edit_buffet_path(current_user.buffet_id), class: "home-login-button owner" %>
-  <%= link_to 'Adicionar Evento', new_event_path, class: "home-login-button owner" %>
-</div>
+  <div class="login-options" id="bottom-button">
+    <%= link_to 'Editar Buffet', edit_buffet_path(current_user.buffet_id), class: "home-login-button owner" %>
+    <%= link_to 'Adicionar Evento', new_event_path, class: "home-login-button owner" %>
+    <%= link_to 'Desativar Buffet', inactive_buffet_path(@buffet.id), class: "home-login-button owner" %>
+  </div>
 
-<%= render 'index_events' %>
+  <%= render 'index_events' %>
+
+<% else %>
+  <%= render 'inactive_message' %>
+  <%= link_to 'Ativar Buffet', active_buffet_path(@buffet.id), class: "home-login-button owner" %>
+<% end %>
+

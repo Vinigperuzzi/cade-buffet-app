@@ -69,6 +69,58 @@ describe "Buffet API" do
       json_response = JSON.parse(response.body)
       expect(json_response).to eq []
     end
+
+    it "and do not return inactived buffets" do
+      user = User.create!(email: 'vinicius@email.com', password: 'password')
+      buffet = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
+        register_number: '12456456000145', phone: '53 991814646',
+        email: 'vinigperuzzi@gourmet.com', address: 'Estrada do Laranjal, 695',
+        district: 'Laranjal', state: 'RS', city: 'Pelotas',
+        payment_method: 'Pix, Débito, Crédito, Dinheiro',
+        description: 'O melhor serviço de buffet do centro de Pelotas', active: false)
+      user.update!(buffet_id: buffet.id)
+
+      user2 = User.create!(email: 'debora@email.com', password: 'password2')
+      buffet2 = Buffet.create!(name: 'Dedi Delícias', corporate_name: 'Amaral eventos LTDA', 
+        register_number: '32156456000145', phone: '53 991535353', email: 'dedi@delicias.com',
+        address: 'Marechal Deodoro, 200', district: 'Centro', state: 'RS', city: 'Piratini',
+        payment_method: 'Pix, Dinheiro', description: 'O evento mais elegante da região')
+      user2.update!(buffet_id: buffet2.id)
+
+      get "/api/v1/buffets"
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.length).to eq 1
+      expect(json_response[0]["name"]).to eq "Dedi Delícias"
+      expect(json_response[0]["id"]).to eq 2
+    end
+
+    it 'and do not return inactivated buffets on search' do
+      user = User.create!(email: 'vinicius@email.com', password: 'password')
+      buffet = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
+        register_number: '12456456000145', phone: '53 991814646',
+        email: 'vinigperuzzi@gourmet.com', address: 'Estrada do Laranjal, 695',
+        district: 'Laranjal', state: 'RS', city: 'Pelotas',
+        payment_method: 'Pix, Débito, Crédito, Dinheiro',
+        description: 'O melhor serviço de buffet do centro de Pelotas', active: false)
+      user.update!(buffet_id: buffet.id)
+
+      user2 = User.create!(email: 'debora@email.com', password: 'password2')
+      buffet2 = Buffet.create!(name: 'Dedi Delícias', corporate_name: 'Amaral eventos LTDA', 
+        register_number: '32156456000145', phone: '53 991535353', email: 'dedi@delicias.com',
+        address: 'Marechal Deodoro, 200', district: 'Centro', state: 'RS', city: 'Piratini',
+        payment_method: 'Pix, Dinheiro', description: 'O evento mais elegante da região')
+      user2.update!(buffet_id: buffet2.id)
+
+      get "/api/v1/buffets?query=Vini"
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response).to eq []
+    end
   end
 
   context 'GET /api/v1/buffets/id' do
@@ -110,6 +162,23 @@ describe "Buffet API" do
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse(response.body)
       expect(json_response["error"]).to eq "Buffet not found for this buffet_id"
+    end
+
+    it 'and the buffet are inactivated' do
+      user = User.create!(email: 'vinicius@email.com', password: 'password')
+      buffet = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
+        register_number: '12456456000145', phone: '53 991814646', email: 'vinigperuzzi@gourmet.com',
+        address: 'Estrada do Laranjal, 695', district: 'Laranjal', state: 'RS', city: 'Pelotas',
+        payment_method: 'Pix, Débito, Crédito, Dinheiro',
+        description: 'O melhor serviço de buffet do centro de Pelotas', active: false)
+      user.update!(buffet_id: buffet.id)
+
+      get "/api/v1/buffets/1"
+
+      expect(response.status).to eq 406
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response["error"]).to eq "Buffet inactive"
     end
   end
 end

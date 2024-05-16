@@ -76,6 +76,45 @@ describe "Buffet API" do
       json_response = JSON.parse(response.body)
       expect(json_response["error"]).to eq "Buffet not found for this buffet_id"
     end
+
+    it "and do not return inactived events" do
+      user = User.create!(email: 'vinicius@email.com', password: 'password')
+      buffet = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
+        register_number: '12456456000145', phone: '53 991814646',
+        email: 'vinigperuzzi@gourmet.com', address: 'Estrada do Laranjal, 695',
+        district: 'Laranjal', state: 'RS', city: 'Pelotas',
+        payment_method: 'Pix, Débito, Crédito, Dinheiro',
+        description: 'O melhor serviço de buffet do centro de Pelotas', active: false)
+      user.update!(buffet_id: buffet.id)
+      event1 = Event.create!(name: 'Casamento',
+        description: 'Serviço de mesa completo para casamentos',
+        min_qtd: 20, max_qtd: 40, duration: 250, menu: 'Frutos do Mar',
+        buffet_id: buffet.id, drinks: false, decoration: true,
+        valet: false, only_local: false, active: false)
+      event2 = Event.create!(name: 'Formatura',
+        description: 'Formatura de alto padrão',
+        min_qtd: 200, max_qtd: 400, duration: 250,
+        menu: 'Doces, tortas, bolos e canapés',
+        buffet_id: buffet.id, drinks: false, decoration: false,
+        valet: false, only_local: false)
+      price = Price.create!(base_price: 5000, sp_base_price:6000,
+        sp_additional_person:500, additional_person:200, sp_extra_hour:30,
+        extra_hour:20, event_id: event1.id)
+      price2 = Price.create!(base_price: 5000, sp_base_price:6000,
+        sp_additional_person:500, additional_person:200, sp_extra_hour:30,
+        extra_hour:20, event_id: event2.id)
+
+      get "/api/v1/events?buffet_id=1"
+
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.class).to eq Array
+      expect(json_response.length).to eq 1
+      expect(json_response[0]["name"]).to eq "Formatura"
+      expect(json_response[0]["id"]).to eq 2
+      expect(json_response[0]["description"]).to eq "Formatura de alto padrão"
+    end
   end
 
   context 'GET /api/v1/events/id/check_date?date=yyyy-mm-dd&guest_qtd=int' do
@@ -304,6 +343,32 @@ describe "Buffet API" do
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse(response.body)
       expect(json_response["error"]).to eq "Event not found for this id"
+    end
+
+    it 'and the event are inactive' do
+      user = User.create!(email: 'vinicius@email.com', password: 'password')
+      buffet = Buffet.create!(name: 'Vini',
+        corporate_name: 'Vinícius Gourmet alimentos', 
+        register_number: '12456456000145', phone: '53 991814646',
+        email: 'vinigperuzzi@gourmet.com', address: 'Estrada do Laranjal, 695',
+        district: 'Laranjal', state: 'RS', city: 'Pelotas',
+        payment_method: 'Pix, Débito, Crédito, Dinheiro',
+        description: 'O melhor serviço de buffet do centro de Pelotas')
+      user.update!(buffet_id: buffet.id)
+      event = Event.create!(name: 'Casamento',
+        description: 'Serviço de mesa completo para casamentos',
+        min_qtd: 20, max_qtd: 40, duration: 250,
+        menu: 'Frutos do Mar', buffet_id: buffet.id, active: false)
+      price = Price.create!(base_price: 5000, sp_base_price:6000,
+        sp_additional_person:500, additional_person:200,
+        sp_extra_hour:30, extra_hour:20, event_id: event.id)
+
+      get '/api/v1/events/1/check_date?date=2034-12-7&guest_qtd=30'
+
+      expect(response.status).to eq 406
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response["error"]).to eq  'Event is inactive'
     end
   end
 end
