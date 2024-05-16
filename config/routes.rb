@@ -8,8 +8,16 @@ Rails.application.routes.draw do
       get 'my_buffet'
       get 'search'
     end
+    member do
+      get 'active'
+      get 'inactive'
+    end
   end
   resources :events, only: [:new, :create, :show, :edit, :update, :destroy] do
+    member do
+      post 'active'
+      post 'inactive'
+    end
     resources :prices, only: [:new, :create, :edit, :update]
     resources :albums, only: [:new, :create, :edit, :update]
     resources :orders, only: [:new, :create]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_05_073746) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_16_042618) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_05_073746) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"
+    t.boolean "active", default: true
   end
 
   create_table "customers", force: :cascade do |t|
@@ -91,6 +92,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_05_073746) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "only_local"
+    t.boolean "active", default: true
     t.index ["buffet_id"], name: "index_events_on_buffet_id"
   end
 

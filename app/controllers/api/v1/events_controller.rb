@@ -8,7 +8,7 @@ class Api::V1::EventsController < ActionController::API
       buffet = Buffet.find(term)
       raise ActiveRecord::RecordNotFound if buffet.nil?
 
-      model_events = buffet.events
+      model_events = buffet.events.where(active: true)
       events = []
       model_events.each do |e|
         price = Price.find_by(event_id: e.id)
@@ -48,6 +48,10 @@ class Api::V1::EventsController < ActionController::API
     return render status: 406, json: {
       error: "Event not found for this id"
       } if @event.nil?
+
+    return render status: 406, json: {
+      error: "Event is inactive"
+      } unless @event.active
 
     @date = params[:date].to_date
     return render status: 412, json: {

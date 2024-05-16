@@ -58,6 +58,22 @@ class EventsController < ApplicationController
     redirect_to my_buffet_buffets_path
   end
 
+  def active
+    @event = Event.find(params[:id])
+    return redirect_to root_path unless @event.buffet_id == current_user.buffet_id
+    @event.active = true
+    @event.save
+    redirect_to @event
+  end
+
+  def inactive
+    @event = Event.find(params[:id])
+    return redirect_to root_path unless @event.buffet_id == current_user.buffet_id
+    @event.active = false
+    @event.save
+    redirect_to @event
+  end
+
   private
 
   def get_params
