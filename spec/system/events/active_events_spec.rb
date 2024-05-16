@@ -57,6 +57,7 @@ describe 'user (customer or owner) interact with active and inactive events' do
 
       expect(page).to have_content "Este evento está inativo e portanto não está recebendo pedidos no momento."
       expect(page).to have_content "Para mais informações você pode tentar contatar o dono do buffet no e-mail: vinigperuzzi@gourmet.com"
+      expect(page).not_to have_content "Ativar Pedido"
     end
   end
 

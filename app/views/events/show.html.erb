@@ -2,5 +2,7 @@
   <%= render 'show' %>
 <% else %>
   <%= render 'inactive_message' %>
-  <%= button_to 'Ativar Evento', active_event_path(@event.id), method: :post, class: 'home-login-button owner' %>
+  <% if user_signed_in? and @event.buffet_id == current_user.buffet_id %>
+    <%= button_to 'Ativar Evento', active_event_path(@event.id), method: :post, class: 'home-login-button owner' %>
+  <% end %>
 <% end %>
