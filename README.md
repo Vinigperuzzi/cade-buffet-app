@@ -83,7 +83,8 @@ Response example:
   "state": "XX",
   "city": "Some City",
   "payment_method": "List of payment methods",
-  "description": "Description of my buffet"
+  "description": "Description of my buffet",
+  "rating": 5
 }
 ```
 
