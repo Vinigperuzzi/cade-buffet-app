@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       post 'rate', to: 'buffets#create_rate'
       get 'add_cover'
       post 'add_cover', to: 'buffets#create_add_cover'
+      get 'index_ratings', to: 'buffets#index_ratings'
     end
   end
   resources :events, only: [:new, :create, :show, :edit, :update, :destroy] do

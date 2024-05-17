@@ -1,0 +1,17 @@
+pt-BR:
+  score: 'Pontuação'
+  review: 'Comentário'
+  image: "Imagem"
+  images: "Imagens"
+  activerecord:
+    models:
+      rate:
+      one: 'Avaliação'
+      others: 'Avaliações'
+    attributes:
+      rate:
+        score: 'Pontuação'
+        review: 'Comentário'
+        image: "Imagem"
+        images: "Imagens"
+        

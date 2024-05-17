@@ -464,3 +464,81 @@ img {
   font-size: 15px;
   color: var(--grey-color)
 }
+
+.range-slider {
+  -webkit-appearance: none;
+  width: 15%;
+  height: 8px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  margin: 0 10px;
+}
+
+.range-slider:hover {
+  opacity: 1;
+}
+
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #ffcc00;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.range-slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #ffcc00;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+#range-value {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.rate-container{
+  display: flex;
+  justify-content: center;
+}
+
+.rate-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  width: 50%;
+  justify-self: center;
+}
+
+.rate-card:hover {
+  transform: scale(1.02);
+}
+
+.rate-score {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #ffcc00;
+  margin-bottom: 10px;
+}
+
+.rate-review {
+  font-size: 1em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.rate-images img {
+  display: inline-block;
+  margin: 5px;
+  border-radius: 4px;
+}

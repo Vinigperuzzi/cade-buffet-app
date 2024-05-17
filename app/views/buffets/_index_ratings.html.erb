@@ -1,0 +1,23 @@
+<div class="rate-container"><h1>Avaliações</h1></div>
+<div class="rate-container">
+  <% @recent_rates.each do |rate| %>
+    <div class="rate-card">
+      <h2><%= Customer.where(customer_id: rate.customer_id).name %></h2>
+      <div class="rate-score">
+        <%= rate.score %> 🌟
+      </div>
+      <div class="rate-review">
+        <p><%= rate.review %></p>
+      </div>
+      <div class="rate-images">
+        <% rate.images.each do |image| %>
+          <%= image_tag image, height: 100 %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="rate-container">
+  <%= link_to 'Mostrar todas', index_ratings_buffet_path(@buffet.id), class: "home-login-button owner" %>
+</div>
