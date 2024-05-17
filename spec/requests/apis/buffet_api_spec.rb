@@ -125,11 +125,14 @@ describe "Buffet API" do
 
   context 'GET /api/v1/buffets/id' do
     it 'return all desirable details for buffets_id' do
+      customer = Customer.create!(email: 'cliente@email.com', password: 'password',
+        name: 'cliente', cpf: '479.111.310-15')
       user = User.create!(email: 'vinicius@email.com', password: 'password')
       buffet = Buffet.create!(name: 'Vini', corporate_name: 'Vinícius Gourmet alimentos', 
         register_number: '12456456000145', phone: '53 991814646', email: 'vinigperuzzi@gourmet.com',
         address: 'Estrada do Laranjal, 695', district: 'Laranjal', state: 'RS', city: 'Pelotas',
-        payment_method: 'Pix, Débito, Crédito, Dinheiro', description: 'O melhor serviço de buffet do centro de Pelotas')
+        payment_method: 'Pix, Débito, Crédito, Dinheiro',
+        description: 'O melhor serviço de buffet do centro de Pelotas')
       user.update!(buffet_id: buffet.id)
 
       user2 = User.create!(email: 'debora@email.com', password: 'password2')
@@ -138,6 +141,8 @@ describe "Buffet API" do
         address: 'Marechal Deodoro, 200', district: 'Centro', state: 'RS', city: 'Piratini',
         payment_method: 'Pix, Dinheiro', description: 'O evento mais elegante da região')
       user2.update!(buffet_id: buffet2.id)
+      rate = Rate.create!(score: 5, review: 'Muito bom!',
+        buffet_id: buffet.id, customer_id: customer.id)
 
       get "/api/v1/buffets/1"
 
@@ -153,6 +158,7 @@ describe "Buffet API" do
       expect(json_response["city"]).to eq "Pelotas"
       expect(json_response["payment_method"]).to eq "Pix, Débito, Crédito, Dinheiro"
       expect(json_response["description"]).to eq "O melhor serviço de buffet do centro de Pelotas"
+      expect(json_response["rating"]).to eq 5.0
     end
 
     it 'and send invalid buffet_id and fails' do

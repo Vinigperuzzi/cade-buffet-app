@@ -1,0 +1,11 @@
+<h1>Adicionar imagem de capa ao Buffet <%= @buffet.name %></h1>
+
+<%= form_with(model: @buffet, url: add_cover_buffet_path(@buffet.id), method: :post) do |f| %>
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Salvar Buffet' %>
+  </div>
+<% end %>

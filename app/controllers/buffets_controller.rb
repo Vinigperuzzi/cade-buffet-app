@@ -1,10 +1,13 @@
 class BuffetsController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :index, :search]
-  before_action :set_buffet_for_current_user, only: [:my_buffet, :edit, :update, :active, :inactive]
+  before_action :authenticate_user!, except: [:show, :index, :search, :rate, :create_rate, :index_ratings]
+  before_action :set_buffet_for_current_user, only: [:my_buffet, :edit, :update, :active, :inactive, :add_cover, :create_add_cover]
+  before_action :authenticate_customer!, only: [:rate, :create_rate]
+  before_action :check_rate_condition, only: [:rate, :create_rate]
 
   def my_buffet
     @buffet = Buffet.find(current_user.buffet_id)
     @events = @buffet.events
+    get_rate
   end
 
   def show
@@ -13,6 +16,7 @@ class BuffetsController < ApplicationController
       return redirect_to my_buffet_buffets_path
     end
     @events = @buffet.events.where(active: true)
+    get_rate
   end
 
   def index
@@ -86,6 +90,42 @@ class BuffetsController < ApplicationController
     redirect_to @buffet
   end
 
+  def rate
+    @rate = Rate.new()
+  end
+
+  def create_rate
+    p = params.require(:rate).permit(:score, :review, images:[])
+    @rate = Rate.where(buffet_id: @buffet.id, customer_id: current_customer.id)
+    if @rate.empty?
+      @rate = Rate.new(p)
+      @rate.buffet_id = @buffet.id
+      @rate.customer_id = current_customer.id
+      if @rate.save
+        redirect_to @buffet, notice: 'Obrigado por avaliar!'
+      else
+        flash.now[:alert] = 'Erro ao avaliar.'
+        render :rate
+      end
+    else
+      @rate.update(p)
+      redirect_to @buffet, notice: 'Obrigado por avaliar!'
+    end
+  end
+
+  def add_cover; end
+
+  def create_add_cover
+    p = params.require(:buffet).permit(:image)
+    @buffet.update(p)
+    redirect_to @buffet
+  end
+
+  def index_ratings
+    @buffet = Buffet.find(params[:id])
+    @rates = Rate.where(buffet_id: @buffet.id)
+  end
+
   private
 
   def get_params
@@ -101,5 +141,27 @@ class BuffetsController < ApplicationController
       return redirect_to new_buffet_path, alert: message
     end
     @buffet = Buffet.find(current_user.buffet_id)
+  end
+
+  def check_rate_condition
+    @order = Order.find_by(id: params[:order_id])
+    message = "Você não pode avaliar esse Buffet."
+    unless @order and @order.event_date < Date.today and @order.confirmed?
+      return redirect_to root_path, alert: message
+    end
+    unless @order.customer_id == current_customer.id
+      return redirect_to root_path, alert: message
+    end
+    @buffet = Buffet.find(params[:id])
+  end
+
+  def get_rate
+    @recent_rates = Rate.where(buffet_id: @buffet.id).order(updated_at: :desc).limit(3)
+    rates = Rate.where(buffet_id: @buffet.id)
+    acc = 0
+    rates.each do |rate|
+      acc = acc + rate.score
+    end
+    @rate_value = (acc.to_f/rates.length).round(1) unless rates.length == 0
   end
 end

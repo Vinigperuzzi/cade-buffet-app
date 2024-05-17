@@ -1,0 +1,32 @@
+<h1>Avaliar o Buffet <%= @buffet.name %></h1>
+
+<%= form_with(model: [@buffet, @rate], url: rate_buffet_path(@buffet.id, order_id: @order.id), method: :post) do |f| %>
+  <div class="field">
+    <%= f.label :score %>
+    <%= f.range_field :score, min: 1, max: 5, step: 1, class: 'range-slider' %>
+    <% if @rate.errors[:score].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:score) %> <%= @rate.errors[:score].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :review %>
+    <%= f.text_field :review %>
+    <% if @rate.errors[:review].include?("não pode ficar em branco") %>
+      <div class="buffet-advise">
+        <%= t(:description) %> <%= @rate.errors[:review].join(', ').strip %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :images %>
+    <%= f.file_field :images, multiple: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Salvar Avaliação' %>
+  </div>
+<% end %>

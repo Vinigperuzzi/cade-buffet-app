@@ -6,6 +6,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :orders
+  has_one :rate
 
   validates :name, :cpf, presence: :true
   validates :cpf, uniqueness: :true

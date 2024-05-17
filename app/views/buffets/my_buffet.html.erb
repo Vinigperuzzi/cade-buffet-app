@@ -5,9 +5,11 @@
     <%= link_to 'Editar Buffet', edit_buffet_path(current_user.buffet_id), class: "home-login-button owner" %>
     <%= link_to 'Adicionar Evento', new_event_path, class: "home-login-button owner" %>
     <%= link_to 'Desativar Buffet', inactive_buffet_path(@buffet.id), class: "home-login-button owner" %>
+    <%= link_to 'Adicionar Capa', add_cover_buffet_path(@buffet.id), class: "home-login-button owner" %>
   </div>
 
   <%= render 'index_events' %>
+  <%= render 'index_ratings' %>
 
 <% else %>
   <%= render 'inactive_message' %>

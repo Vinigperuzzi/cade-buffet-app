@@ -5,4 +5,6 @@ class Buffet < ApplicationRecord
             :city, :payment_method, :description, presence: :true
   has_many :events
   has_one :order
+  has_one :rate
+  has_one_attached :image
 end

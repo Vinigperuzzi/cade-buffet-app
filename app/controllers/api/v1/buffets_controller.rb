@@ -17,8 +17,9 @@ class Api::V1::BuffetsController < ActionController::API
       raise ActiveRecord::QueryAborted unless b.active
       
       buffet = {name: b.name, phone: b.phone, email: b.email, address: b.address,
-                district: b.district, state: b.state, city: b.city,
-                payment_method: b.payment_method, description: b.description}
+        district: b.district, state: b.state, city: b.city,
+        payment_method: b.payment_method,
+        description: b.description, rating: get_rate(b)}
       render status: 200, json: buffet
 
     rescue ActiveRecord::RecordNotFound => e
@@ -26,5 +27,16 @@ class Api::V1::BuffetsController < ActionController::API
     rescue ActiveRecord::QueryAborted => e
       render status: 406, json: {error: "Buffet inactive"}
     end
+  end
+
+  private
+
+  def get_rate(b)
+    rates = Rate.where(buffet_id: b.id)
+    acc = 0
+    rates.each do |rate|
+      acc = acc + rate.score
+    end
+    @rate_value = (acc.to_f/rates.length).round(1) unless rates.length == 0
   end
 end

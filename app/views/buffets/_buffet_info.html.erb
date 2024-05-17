@@ -1,6 +1,10 @@
 <div class="buffet-card">
   <div class="h1-info">
     <h1>Exibindo o Buffet <%= @buffet.name %></h1>
+    <% if @buffet.image.present? %>
+      <%= image_tag @buffet.image, height: 200 %>
+    <% end %>
+    <h2>Avaliação: <%= @rate_value %> 🌟</h2>
   </div>
 
   <dl class="info-list">
